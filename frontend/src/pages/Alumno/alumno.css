@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+    #student-photo {
+        width: 120px;
+    }
+
+    .info-student {
+        margin-top: 25px;
+    }
+
+    .sm-m {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    #student-photo {
+        width: 90px;
+    }
+
+    .navbar-brand {
+        display: none;
+    }
+}
