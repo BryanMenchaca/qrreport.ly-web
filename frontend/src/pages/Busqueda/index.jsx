@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { SearchOutlined, MoreHoriz } from '@material-ui/icons'
 import './styles.css'
 
+import BusquedaSkeleton from './LoadingSkeleton/';
+
 const Busqueda = () => {
+    const [loading, setLoading] = useState(false);
+    
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(true);
+        }, 5000);
+    })
+
     return (
         <div>
             <div className="row">
@@ -17,12 +27,18 @@ const Busqueda = () => {
                                 <SearchOutlined/>
                             </span>
                         </div>
-                        <input type="text" className="form-control" placeholder="Buscar" aria-describedby="addon-wrapping"/>
+                        <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder="Buscar" 
+                        aria-describedby="addon-wrapping" />
                     </div>
                 </div>
             </div>
             <div className="row mt-4">
-                <div className="col-md-12">
+                <div className="col-md-12"> 
+                    {!loading ? 
+                    <BusquedaSkeleton/> : 
                     <div className="table-responsive-xl">
                         <table className="table custom-table">
                             <thead>
@@ -61,7 +77,7 @@ const Busqueda = () => {
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> }
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import '../assets/css/loading-skeleton-animation.css'
 
 //import RouteWithProps from "../components/RouteWithProps";
 import routes from "../Routes/index";

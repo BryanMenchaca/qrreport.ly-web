@@ -1,20 +1,21 @@
 import React from 'react'
-import imgDefault from '../../assets/default.png'
 
 const Info = () => {
     return (
         <div className="box">
             <div className="row">
                 <div className="col-md-5 d-flex">
-                    <img 
-                    src={imgDefault} 
-                    alt="student" 
-                    className="rounded-circle"
-                    id="student-photo"
-                    width="140px"/>
-                    <h5 className="my-auto ml-4">
-                        Jesus Guillermo Lagunes Robles
-                    </h5>
+                    <div 
+                    className="anim my-3"
+                    style={{
+                        width: 120,
+                    }}></div>
+                    <div 
+                    className="my-auto ml-4 anim"
+                    style={{
+                        width: 230,
+                        height: 30
+                    }}></div>
                 </div>
                 <div className="col-md-7">
                     <div className="row">

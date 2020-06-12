@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CardGrupo from './CardGrupo'
+import CardGrupo from './components/GrupoItem'
 
 const grupos = [
     {semestre: '2', grupo: 'I', especialidad: 'Programación', reportes: 0, generacion: '2019-2022'},

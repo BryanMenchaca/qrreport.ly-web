@@ -1,6 +1,6 @@
 import React from 'react'
 import { MoreVert } from '@material-ui/icons';
-import starOfLife from '../../assets/medic-id.png'
+import starOfLife from '../../../../assets/medic-id.png'
 
 const FichaMedica = () => {
     return (

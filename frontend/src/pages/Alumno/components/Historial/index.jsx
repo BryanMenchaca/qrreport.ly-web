@@ -1,9 +1,9 @@
 import React from 'react'
 import { MoreVert } from '@material-ui/icons'
 
-import Reporte from '../../components/Sanciones/Reporte'
-import Citatorio from '../../components/Sanciones/Citatorio'
-import Suspension from '../../components/Sanciones/Suspension'
+import Reporte from './SancionesItems/Reporte'
+import Citatorio from './SancionesItems/Citatorio'
+import Suspension from './SancionesItems/Suspension'
 
 const Historial = () => {
     return (

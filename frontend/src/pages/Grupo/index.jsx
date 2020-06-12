@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { MoreHoriz } from '@material-ui/icons'
 
+import GrupoSkeleton from './LoadingSkeleton/'
+
 const Index = (props) => {
+    const [loading, setLoading] = useState(false);
     const [grupo, setGrupo] = useState([]);
-    const params = props.match.params.grupo.split('');
+    const [generacion, setGeneracion] = useState([]);
+    const params = props.match.params;
 
     useEffect(() => {
-        setGrupo(params);
+        setGrupo(params.grupo.split(''));
+        setGeneracion(params.generacion.split(''));
+        setTimeout(() => {
+            setLoading(true);
+        }, 5000);
     }, []);
 
     return (
@@ -17,16 +25,20 @@ const Index = (props) => {
                     <h4>{`${grupo[0]} ° ${grupo[1]}`} - Programación</h4>
                 </div>
             </div>
-            <div className="row mt-2">
-                <div className="col-md-12">
-                    <span><b>Generación: </b>2019-2022</span>
-                    <button className="btn btn-info btn-sm float-right">
+            <div className="row">
+                <div className="col-md-12 d-flex justify-content-end">
+                    <button className="btn btn-info btn-sm">
                         Exportar PDF
+                    </button>
+                    <button className="btn btn-danger btn-sm ml-2">
+                        Nuevo reporte
                     </button>
                 </div>
             </div>
-            <div className="row mt-4">
+            <div className="row mt-2">
                 <div className="col-md-12">
+                    {!loading ?
+                    <GrupoSkeleton/> :
                     <div className="table-responsive-xl">
                         <table className="table custom-table">
                             <thead>
@@ -36,6 +48,7 @@ const Index = (props) => {
                                     <th>Reportes</th>
                                     <th>Citatorios</th>
                                     <th>Suspensiones</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,7 +78,7 @@ const Index = (props) => {
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> }
                 </div>
             </div>
         </div>

@@ -1,9 +1,11 @@
 import React from 'react'
 import './alumno.css'
 
-import Info from './Info'
-import FichaMedica from './FichaMedica'
-import Historial from './Historial'
+//import InfoSkeleton from '../../skeleton/Alumno/Info'
+
+import Info from './components/Info'
+import FichaMedica from './components/FichaMedica'
+import Historial from './components/Historial'
 
 const index = () => {
     return (

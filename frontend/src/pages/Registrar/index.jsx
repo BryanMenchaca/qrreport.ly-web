@@ -1,8 +1,8 @@
 import React from 'react'
 
-import DatosPrincipales from './DatosPrincipalesForm'
-//import FichaMedica from './FichaMedicaForm'
-//import Dropzone from './Dropzone'
+import DatosPrincipales from './components/DatosPrincipales/'
+//import FotoAlumno from './components/FotoAlumno'
+//import FichaMedica from './components/FichaMedica'
 
 const index = () => {
     return (
