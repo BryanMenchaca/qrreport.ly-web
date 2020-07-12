@@ -1,45 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { MoreHoriz } from '@material-ui/icons'
+//import jsPDF from 'jspdf'
+//import html2canvas from 'html2canvas'
 
 import GrupoSkeleton from './LoadingSkeleton/'
 
-const Index = (props) => {
-    const [loading, setLoading] = useState(false);
+const Grupo = ({match}) => {
+    const [loading, setLoading] = useState(true);
     const [grupo, setGrupo] = useState([]);
     const [generacion, setGeneracion] = useState([]);
-    const params = props.match.params;
+    const params = match.params;
 
     useEffect(() => {
         setGrupo(params.grupo.split(''));
         setGeneracion(params.generacion.split(''));
         setTimeout(() => {
-            setLoading(true);
+            setLoading(false);
         }, 5000);
-    }, []);
+    }, [params.grupo, params.generacion]);
 
     return (
-        <div>
+        <div id="pdfdiv">
             <div className="row">
                 <div className="col-md-12">
                     <h4>{`${grupo[0]} ° ${grupo[1]}`} - Programación</h4>
                 </div>
             </div>
-            <div className="row">
+            <div className="row" id="ignorePDF">
                 <div className="col-md-12 d-flex justify-content-end">
-                    <button className="btn btn-info btn-sm">
+                    <button onClick={() => window.print()} className="btn btn-info btn-sm ml-2 ignorePrint">
                         Exportar PDF
                     </button>
-                    <button className="btn btn-danger btn-sm ml-2">
+                    <button className="btn btn-danger btn-sm ml-2 ignorePrint">
                         Nuevo reporte
                     </button>
                 </div>
             </div>
             <div className="row mt-2">
                 <div className="col-md-12">
-                    {!loading ?
+                    {loading ?
                     <GrupoSkeleton/> :
-                    <div className="table-responsive-xl">
+                    <div id="pdfdiv" className="table-responsive-xl">
                         <table className="table custom-table">
                             <thead>
                                 <tr>
@@ -48,7 +50,7 @@ const Index = (props) => {
                                     <th>Reportes</th>
                                     <th>Citatorios</th>
                                     <th>Suspensiones</th>
-                                    <th>Acción</th>
+                                    <th className="ignorePrint">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,7 +60,7 @@ const Index = (props) => {
                                     <td>0</td>
                                     <td>0</td>
                                     <td>0</td>
-                                    <td>
+                                    <td className="ignorePrint">
                                         <Link to="/dashboard/alumno" className="btn btn-sm btn-light">
                                             <MoreHoriz className="text-info"/> Ver más
                                         </Link>
@@ -70,7 +72,7 @@ const Index = (props) => {
                                     <td>0</td>
                                     <td>0</td>
                                     <td>0</td>
-                                    <td>
+                                    <td className="ignorePrint">
                                         <Link to="/dashboard/alumno" className="btn btn-sm btn-light">
                                             <MoreHoriz className="text-info"/> Ver más
                                         </Link>
@@ -85,4 +87,4 @@ const Index = (props) => {
     )
 }
 
-export default Index
+export default Grupo

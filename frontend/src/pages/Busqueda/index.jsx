@@ -6,11 +6,11 @@ import './styles.css'
 import BusquedaSkeleton from './LoadingSkeleton/';
 
 const Busqueda = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         setTimeout(() => {
-            setLoading(true);
+            setLoading(false);
         }, 5000);
     })
 
@@ -28,16 +28,17 @@ const Busqueda = () => {
                             </span>
                         </div>
                         <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="Buscar" 
-                        aria-describedby="addon-wrapping" />
+                            type="text" 
+                            className="form-control" 
+                            placeholder="Buscar" 
+                            aria-describedby="addon-wrapping"
+                            disabled={loading ? true : false} />
                     </div>
                 </div>
             </div>
             <div className="row mt-4">
                 <div className="col-md-12"> 
-                    {!loading ? 
+                    {loading ? 
                     <BusquedaSkeleton/> : 
                     <div className="table-responsive-xl">
                         <table className="table custom-table">

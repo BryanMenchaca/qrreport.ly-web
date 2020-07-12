@@ -8,7 +8,7 @@ import Suspension from './SancionesItems/Suspension'
 const Historial = () => {
     return (
         <div>
-            <div className="d-flex">
+            <div className="d-flex ignorePrint">
                 <div className="form-inline mb-3 sm-m mr-auto">
                     <label htmlFor="show">Mostrar: </label>
                     <select className="form-control form-control-sm ml-3" id="show" defaultValue="t">

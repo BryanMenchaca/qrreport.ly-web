@@ -17,12 +17,11 @@ const BusquedaSkeleton = () => {
                 <tbody>
                     { [1,2,3,4,5,6,7].map(value => {
                         return (
-                            <tr className="mt-3" key={value}>
+                            <tr className="mt-3" key={value.toString()}>
                                 {[80,70,30,40,70,70].map((value, index) => {
                                     return (
-                                        <td>
+                                        <td key={index}>
                                             <div 
-                                            key={index}
                                             style={{width: `${value}%`}}
                                             className="anim">-
                                             </div>

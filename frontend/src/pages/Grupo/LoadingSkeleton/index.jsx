@@ -17,7 +17,7 @@ const GrupoSkeleton = () => {
                 <tbody>
                     { [1,2,3,4,5,6,7].map(value => {
                         return (
-                            <tr className="mt-3" key={value}>
+                            <tr className="mt-3" key={value.toString()}>
                                 {[80,70,30,28,20,70].map((value, index) => {
                                     return (
                                         <td>

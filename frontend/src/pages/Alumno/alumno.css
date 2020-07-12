@@ -1,3 +1,33 @@
+.custom-badge {
+    margin: 40px auto;
+    max-width: 240px;
+    padding: 10px;
+    background: #E5EFFB;
+    color: #5C9DFF;
+    border-radius: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+}
+
+#pills-tab {
+    padding: 5px;
+    background: #d3e5fc;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 1px #e4eef0;
+}
+
+#pills-tab .active {
+    background: none;
+    color: #2262c2;
+    font-weight: 600;
+}
+
+#pills-tab li {
+    font-size: 15px;
+}
+
 @media (max-width: 768px) {
     #student-photo {
         width: 120px;
