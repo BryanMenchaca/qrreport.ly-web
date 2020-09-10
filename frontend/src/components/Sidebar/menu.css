@@ -5,6 +5,11 @@
     box-shadow: 0px 2px 5px 0px #e4eef0;
 }
 
+.custom-form-control {
+    background: #f5f7fc;
+    border-color: #e6ebf0;
+}
+
 #navbar {
     background-color: #2E53FF;
 }

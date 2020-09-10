@@ -34,7 +34,7 @@ const grupos = {
 
 const Grupos = () => {   
     return (
-        <div>
+        <div className="mb-3">
             <div className="row">
                 <div className="col-md-12">
                     <h4>Grupos</h4>
@@ -42,7 +42,9 @@ const Grupos = () => {
             </div>
             <div className="row mt-3">
                 <div className="col-md-12">
-                    <h6 style={{color: '#a4b1cb'}}>Primer año</h6>
+                    <h6 style={{color: '#a4b1cb'}}>
+                        Primer año
+                    </h6>
                 </div>
                 {
                     grupos.first.map((grupo, index) => {
@@ -56,9 +58,11 @@ const Grupos = () => {
                     })
                 }
             </div>
-            <div className="row mt-4">
+            <div className="row">
                 <div className="col-md-12">
-                    <h6 style={{color: '#a4b1cb'}}>Segundo año</h6>
+                    <h6 style={{marginTop: 35, color: '#a4b1cb'}}>
+                        Segundo año
+                    </h6>
                 </div>
                 {
                     grupos.second.map((grupo, index) => {
@@ -72,9 +76,11 @@ const Grupos = () => {
                     })
                 }
             </div>
-            <div className="row my-4">
+            <div className="row">
                 <div className="col-md-12">
-                    <h6 style={{color: '#a4b1cb'}}>Tercer año</h6>
+                    <h6 style={{marginTop: 35, color: '#a4b1cb'}}>
+                        Tercer año
+                    </h6>
                 </div>
                 {
                     grupos.third.map((grupo, index) => {

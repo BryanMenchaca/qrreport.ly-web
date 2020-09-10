@@ -1,79 +1,131 @@
-import React from 'react'
-import { ArrowForward } from '@material-ui/icons'
+import React, { useState, useContext } from "react";
+import { ArrowForward } from "@material-ui/icons";
+import { RegisterContext } from "../../common/context";
+import { InputField, SelectField } from "../../../../components/Inputs/";
 
 const DatosPrincipales = () => {
-    return (
-        <div className="box">
-            <form action="">
-                <h5 className="font-weight-regular">Datos principales</h5>
-                <div className="row mt-4">
-                    <div className="form-group col-md-4">
-                        <label htmlFor="">Nombre(s)</label>
-                        <input type="text" className="form-control" name="nombre" />
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label htmlFor="">Apellido Paterno</label>
-                        <input type="text" className="form-control" name="apellidoP" />
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label htmlFor="">Apellido Materno</label>
-                        <input type="text" className="form-control" name="nombre" />
-                    </div>
-                </div>
-                <div className="row mt-3">
-                    <div className="form-group col-md-3">
-                        <label htmlFor="">Semestre</label>
-                        <input type="text" className="form-control" name="semestre" />
-                    </div>
-                    <div className="form-group col-md-3">
-                        <label htmlFor="">Grupo</label>
-                        <input type="text" className="form-control" name="grupo" />
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="">Especialidad</label>
-                        <select className="custom-select" defaultValue="Seleccionar">
-                            <option>Seleccionar especialidad</option>
-                            <option value="contabilidad">Contabilidad</option>
-                            <option value="electricidad">Electricidad</option>
-                            <option value="enfermeria">Enfermería General</option>
-                            <option value="fuentes">Fuentes alternas de energía</option>
-                            <option value="laboratorista">Laboratorista Químico</option>
-                            <option value="programacion">Programación</option>
-                            <option value="soporte">Soporte y Mantenimiento de Computo</option>
-                            <option value="trabajoSocial">Trabajo Social</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="row mt-3">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="">Generación</label>
-                        <input type="text" className="form-control" name="Generación" />
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="">Número de control</label>
-                        <input type="text" className="form-control" name="noControl" />
-                    </div>
-                </div>
-                <div className="row mt-3">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="">CURP</label>
-                        <input type="text" className="form-control" name="curp" />
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="">Número de seguridad social</label>
-                        <input type="text" className="form-control" name="nss" />
-                    </div>
-                </div>
-                <div className="row mt-4">
-                    <div className="col-md-12">
-                        <button className="btn btn-primary btn-sm float-right">
-                            Siguiente <ArrowForward/>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    )
-}
+  const { state, dispatch } = useContext(RegisterContext);
+  const { studentData } = state;
 
-export default DatosPrincipales
+  const [inputValues, setInputValues] = useState({ ...studentData });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "NEXT_STEP", payload: inputValues });
+  };
+
+  return (
+    <div className="box">
+      <h5 className="font-weight-regular mb-4">Datos principales</h5>
+      <form className="row mt-2" onSubmit={handleSubmit} noValidate>
+        <div className="col-md-4">
+          <InputField
+            type="text"
+            label="Número de control"
+            name="noControl"
+            value={inputValues.noControl}
+            onChange={handleChange}
+          />
+          <InputField
+            type="text"
+            label="Nombre(s)"
+            name="nombre"
+            value={inputValues.nombre}
+            onChange={handleChange}
+          />
+          <InputField
+            type="text"
+            label="Apellido Paterno"
+            name="apellidoP"
+            value={inputValues.apellidoP}
+            onChange={handleChange}
+          />
+          <InputField
+            type="text"
+            label="Apellido Materno"
+            name="apellidoM"
+            value={inputValues.apellidoM}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-md-4">
+          <InputField
+            type="text"
+            label="Semestre"
+            name="semestre"
+            value={inputValues.semestre}
+            onChange={handleChange}
+          />
+          <InputField
+            type="text"
+            label="Grupo"
+            name="grupo"
+            value={inputValues.grupo}
+            onChange={handleChange}
+          />
+          <SelectField
+            label="Especialidad"
+            name="especialidad"
+            value={inputValues.especialidad}
+            onChange={handleChange}
+            options={especialidades}
+          />
+          <InputField
+            type="text"
+            label="Generacion"
+            name="generacion"
+            value={inputValues.generacion}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-md-4">
+          <InputField
+            type="text"
+            label="CURP"
+            name="curp"
+            value={inputValues.curp}
+            onChange={handleChange}
+          />
+          <InputField
+            type="text"
+            label="Número de seguridad social"
+            name="nss"
+            value={inputValues.nss}
+            onChange={handleChange}
+          />
+          <div className="form-group mt-2">
+            <label htmlFor="" className="text-white mt-2">
+              -
+            </label>
+            <button
+              id="nextStepBtn"
+              className="btn btn-primary btn-sm form-control"
+            >
+              Siguiente <ArrowForward />
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default React.memo(DatosPrincipales);
+
+const especialidades = [
+  "Contabilidad",
+  "Electricidad",
+  "Enfermería General",
+  "Fuentes de Energías Alternas",
+  "Laboratorista Químico",
+  "Programación",
+  "Soporte y Mantenimiento de Comput",
+];
