@@ -3,7 +3,6 @@ import reducer from "./reducer";
 
 const initialState = {
   step: 1,
-  photo: undefined,
   studentData: {
     noControl: "",
     nombre: "",

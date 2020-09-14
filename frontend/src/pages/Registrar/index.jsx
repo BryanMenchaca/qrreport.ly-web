@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { RegisterContext, RegisterProvider } from "./common/context";
 
 import DatosPrincipales from "./components/DatosPrincipales/";
-import FotoAlumno from "./components/FotoAlumno";
 import FichaMedica from "./components/FichaMedica";
 import VerificarDatos from "./components/VerificarDatos";
 
@@ -15,8 +14,6 @@ const StepForm = () => {
     case 2:
       return <FichaMedica />;
     case 3:
-      return <FotoAlumno />;
-    case 4:
       return <VerificarDatos />;
     default:
       return <p>Default case</p>;

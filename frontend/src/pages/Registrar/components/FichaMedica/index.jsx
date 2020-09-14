@@ -79,7 +79,7 @@ const FichaMedica = () => {
             <SelectField
               label="Grupo sanguíneo"
               name="grupo_sanguineo"
-              defaultValue={inputValues.grupo_sanguieno}
+              defaultValue={inputValues.grupo_sanguineo}
               onChange={handleChange}
               options={options.grupos_sanguineos}
             />

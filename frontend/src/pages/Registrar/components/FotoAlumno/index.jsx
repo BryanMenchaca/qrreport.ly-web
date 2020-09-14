@@ -1,11 +1,8 @@
 import React, { useState, useContext, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { RegisterContext } from "../../common/context";
-import {
-  CloudUploadOutlined,
-  ArrowBack,
-  ArrowForward,
-} from "@material-ui/icons";
+import { ArrowBack, ArrowForward } from "@material-ui/icons";
+import IsUploaded from "./IsUploaded";
 
 const Dropzone = () => {
   const { state, dispatch } = useContext(RegisterContext);
@@ -47,28 +44,14 @@ const Dropzone = () => {
       <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
         <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
-          <CloudUploadOutlined style={{ fontSize: 50 }} />
-          {isDragActive ? (
-            <p>Suelte la fotografía aquí</p>
-          ) : (
-            <p>
-              Arratre y suelte una fotografía para cargarla ó presione aquí para
-              seleccionar
-            </p>
-          )}
+          <IsUploaded dragActive={isDragActive} filesArray={files} />
         </div>
         <div className="row mt-2">
           <div className="col-md-12">
-            {files ? (
-              <small className="text-muted">
-                {files[0].name} - {files[0].size / 1000000} mb
-              </small>
-            ) : (
-              <small className="text-muted">
-                * Omita este paso en caso de no contar en este momento con una
-                fotografía del alumno(a).
-              </small>
-            )}
+            <small className="text-muted">
+              * Omita este paso en caso de no contar en este momento con una
+              fotografía del alumno(a).
+            </small>
           </div>
         </div>
         <div className="row mt-4">

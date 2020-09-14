@@ -1,3 +1,5 @@
+import { registerStudentData } from "../../../services/API";
+
 export default (state, action) => {
   const { step } = state;
   const { type, payload } = action;
@@ -6,11 +8,12 @@ export default (state, action) => {
     case "NEXT_STEP":
       if (step === 1) return updateState(state, "studentData", payload);
       else if (step === 2) return updateState(state, "ficha_medica", payload);
-      else if (step === 3) return updateState(state, "photo", payload);
       else return state;
     case "PREV_STEP":
       return { ...state, step: step - 1 };
-    case "SUCCESS":
+    case "REGISTER":
+      console.log(state);
+      registerStudentData(state);
       return state;
     default:
       return state;
