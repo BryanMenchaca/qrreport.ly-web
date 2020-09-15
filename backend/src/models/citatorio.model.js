@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const citatorioSchema = new Schema(
   {
     folio: String,
-    noControl: Number,
+    noControl: String,
     fecha: { type: Date, default: Date.now },
     fechaCita: Date,
     horaCita: String,

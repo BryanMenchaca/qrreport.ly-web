@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const reporteSchema = new Schema(
   {
     folio: String,
-    noControl: Number,
+    noControl: String,
     fecha: { type: Date, default: Date.now },
     motivo: String,
     observaciones: { type: String, default: "Sin observaciones" },

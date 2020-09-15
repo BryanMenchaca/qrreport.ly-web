@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const suspensionSchema = new Schema(
   {
     folio: String,
-    noControl: Number,
+    noControl: String,
     fecha: { type: Date, default: Date.now },
     motivo: String,
     desde: Date,

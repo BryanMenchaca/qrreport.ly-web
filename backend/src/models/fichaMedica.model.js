@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const fichaMedicaSchema = new Schema(
   {
+    noControl: String,
     padecimientos: String,
     notas_medicas: String,
     alergias_reacciones: String,
@@ -14,6 +15,7 @@ const fichaMedicaSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "ContactoEmergencia",
     },
+    actualizacion: Date
   },
   { collection: "fichasMedicas" }
 );

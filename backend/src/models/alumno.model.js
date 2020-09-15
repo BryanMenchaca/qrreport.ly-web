@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const alumnoSchema = new Schema(
   {
-    noControl: Number,
+    noControl: String,
     nombre: String,
     apellidoP: String,
     apellidoM: String,
-    semestre: Number,
+    semestre: String,
     grupo: String,
     especialidad: String,
     generacion: String,
@@ -15,8 +15,8 @@ const alumnoSchema = new Schema(
     citatorios: [{ type: Schema.Types.ObjectId, ref: "Citatorios" }],
     suspensiones: [{ type: Schema.Types.ObjectId, ref: "Suspensiones" }],
     curp: String,
-    nss: Number,
-    ficha_medica: { type: Schema.Types.ObjectId, ref: "FichaMedica" },
+    nss: String,
+    status: Boolean
   },
   { collection: "alumnos" }
 );
