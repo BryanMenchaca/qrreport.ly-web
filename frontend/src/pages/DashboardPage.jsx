@@ -1,16 +1,16 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import '../assets/css/loading-skeleton-animation.css'
+import "../assets/css/loading-skeleton-animation.css";
 
 //import RouteWithProps from "../components/RouteWithProps";
 import routes from "../Routes/index";
 
 import Inicio from "./Inicio";
-import Busqueda from "./Busqueda"
-import Grupos from "./Grupos"
-import Grupo from "./Grupo"
-import Registrar from "./Registrar"
-import Alumno from "./Alumno"
+import Busqueda from "./Busqueda";
+import Grupos from "./Grupos";
+import Grupo from "./Grupo";
+import Registrar from "./Registrar";
+import Alumno from "./Alumno";
 
 const DashboardPage = () => {
   return (
@@ -25,4 +25,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage
+export default DashboardPage;

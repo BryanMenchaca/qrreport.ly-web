@@ -5,6 +5,5 @@ export default {
   registrar: "/dashboard/registrar",
   grupos: "/dashboard/grupos",
   grupo: "/dashboard/grupo/:grupo/:generacion",
-  grupoPDF: "/dashboard/grupo/export-pdf",
-  alumno: "/dashboard/alumno",
-}
+  alumno: "/dashboard/alumno/:noControl",
+};

@@ -28,7 +28,7 @@ const FichaMedica = () => {
 
   return (
     <div className="box">
-      <form onSubmit={handleSubmit} noValidate>
+      <form id="ficha-medica-form" onSubmit={handleSubmit} noValidate>
         <h5 className="font-weight-regular text-danger">Ficha médica</h5>
         <div className="row mt-3">
           <div className="col-md-6">
@@ -37,7 +37,7 @@ const FichaMedica = () => {
               name="padecimientos"
               cols="30"
               rows="2"
-              value={inputValues.padecimientos}
+              defaultValue={inputValues.padecimientos}
               onChange={handleChange}
             />
           </div>
@@ -47,7 +47,7 @@ const FichaMedica = () => {
               name="notas_medicas"
               cols="30"
               rows="2"
-              value={inputValues.notas_medicas}
+              defaultValue={inputValues.notas_medicas}
               onChange={handleChange}
             />
           </div>
@@ -56,10 +56,10 @@ const FichaMedica = () => {
           <div className="col-md-6">
             <TextArea
               label="Alergias y sus reacciones"
-              name="alergias"
+              name="alergias_reacciones"
               cols="30"
               rows="2"
-              value={inputValues.alergias}
+              defaultValue={inputValues.alergias_reacciones}
               onChange={handleChange}
             />
           </div>
@@ -69,7 +69,7 @@ const FichaMedica = () => {
               name="medicamentos"
               cols="30"
               rows="2"
-              value={inputValues.medicamentos}
+              defaultValue={inputValues.medicamentos}
               onChange={handleChange}
             />
           </div>
@@ -93,7 +93,7 @@ const FichaMedica = () => {
                 type="text"
                 className="form-control custom-form-control"
                 name="estatura"
-                value={inputValues.estatura}
+                defaultValue={inputValues.estatura}
                 onChange={handleChange}
               />
               <div className="input-group-append">
@@ -110,7 +110,7 @@ const FichaMedica = () => {
                 type="text"
                 className="form-control custom-form-control"
                 name="peso"
-                value={inputValues.peso}
+                defaultValue={inputValues.peso}
                 onChange={handleChange}
               />
               <div className="input-group-append">
@@ -130,7 +130,7 @@ const FichaMedica = () => {
               type="text"
               label="Parentesco"
               name="parentesco"
-              value={inputValues.contacto_emergencia.parentesco}
+              defaultValue={inputValues.contacto_emergencia.parentesco}
               onChange={handleChange}
             />
           </div>
@@ -139,7 +139,7 @@ const FichaMedica = () => {
               type="text"
               label="Nombre y apellido"
               name="nombre_parentesco"
-              value={inputValues.contacto_emergencia.nombre}
+              defaultValue={inputValues.contacto_emergencia.nombre}
               onChange={handleChange}
             />
           </div>
@@ -152,7 +152,7 @@ const FichaMedica = () => {
                 className="form-control custom-form-control"
                 placeholder="000-000-0000"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                value={inputValues.contacto_emergencia.telefono}
+                defaultValue={inputValues.contacto_emergencia.telefono}
                 onChange={handleChange}
               />
             </div>

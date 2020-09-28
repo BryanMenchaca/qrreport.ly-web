@@ -1,36 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import reducer from "./reducer";
-
-const initialState = {
-  step: 1,
-  studentData: {
-    noControl: "",
-    nombre: "",
-    apellidoP: "",
-    apellidoM: "",
-    semestre: "",
-    grupo: "",
-    especialidad: "",
-    generacion: "",
-    curp: "",
-    nss: "",
-  },
-  ficha_medica: {
-    padecimientos: "Ninguna indicación.",
-    notas_medicas: "Ninguna indicación.",
-    alergias: "Ninguna indicación.",
-    medicamentos: "Ninguna indicación.",
-    grupo_sanguineo: "Sin asignar.",
-    estatura: "Sin asignar.",
-    peso: "Sin asignar.",
-    contacto_emergencia: {
-      parentesco: "Sin asignar.",
-      nombre: "Sin asignar.",
-      telefono: "Sin asignar.",
-      etiqueta: "Sin asignar.",
-    },
-  },
-};
+import { reducer, initialState } from "./reducer";
 
 const RegisterContext = createContext(initialState);
 

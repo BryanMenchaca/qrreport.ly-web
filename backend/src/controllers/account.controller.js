@@ -57,7 +57,7 @@ module.exports = {
         jwt.sign(
           payload,
           process.env.SECRET_KEY,
-          { expiresIn: "4h" },
+          { expiresIn: "3h" },
           (error, token) => {
             if (error) res.json({ error });
             res.header("Authorization", token).send(token);
@@ -66,7 +66,7 @@ module.exports = {
       } else {
         res.json({
           error: true,
-          message: "Usuario y/o contraseña incorrectos.",
+          message: "Email y/o contraseña incorrectos.",
         });
       }
     } else {

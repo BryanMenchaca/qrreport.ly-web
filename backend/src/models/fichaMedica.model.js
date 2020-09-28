@@ -15,7 +15,7 @@ const fichaMedicaSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "ContactoEmergencia",
     },
-    actualizacion: Date
+    actualizacion: Date,
   },
   { collection: "fichasMedicas" }
 );

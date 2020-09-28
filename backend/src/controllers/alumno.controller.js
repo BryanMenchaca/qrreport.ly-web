@@ -2,17 +2,25 @@ const AlumnoModel = require("../models/alumno.model");
 const FichaModel = require("../models/fichaMedica.model");
 const ContactoModel = require("../models/contactoEmergencia.controller");
 
+const ReporteModel = require("../models/reporte.model");
+const CitatorioModel = require("../models/citatorio.model");
+const SuspensionModel = require("../models/suspension.model");
+
+const lowerAndCap = require("../lib/lowerAndCap");
+
 module.exports = {
   // @route     GET /api/students/getOne/:noControl
   // @desc      Get student info
-  // @access    The student info can be public
+  // @access    Private
   getOne: async (req, res) => {
     const { noControl } = req.params;
 
-    const studentData = await AlumnoModel.findOne({ noControl: parseInt(noControl), });
+    const studentData = await AlumnoModel.findOne({
+      noControl: parseInt(noControl),
+    });
 
     const fichaMedica = await FichaModel.findOne({
-      noControl: parseInt(noControl)
+      noControl: parseInt(noControl),
     }).populate("contacto_emergencia");
 
     res.json({ studentData, fichaMedica });
@@ -27,22 +35,32 @@ module.exports = {
     // Extract data from objects
     const { contacto_emergencia, ...restFM } = ficha_medica;
 
-    const isAlredyRegistered = await AlumnoModel.findOne({ noControl: studentData.noControl });
+    const isAlredyRegistered = await AlumnoModel.findOne({
+      noControl: studentData.noControl,
+    });
 
     if (!isAlredyRegistered) {
       const contacto_created = await ContactoModel.create({
         ...contacto_emergencia,
+        nombre: lowerAndCap(contacto_emergencia.nombre),
       });
+
       const fm_created = await FichaModel.create({
         noControl: studentData.noControl,
         ...restFM,
         contacto_emergencia: contacto_created._id,
-        actualizacion: today
+        actualizacion: today,
       });
 
       if (fm_created) {
         // is ficha medica inserted
-        const student_created = await AlumnoModel.create({...studentData, status: true});
+        const student_created = await AlumnoModel.create({
+          ...studentData,
+          nombre: lowerAndCap(studentData.nombre),
+          apellidoP: lowerAndCap(studentData.apellidoP),
+          apellidoM: lowerAndCap(studentData.apellidoM),
+          status: true,
+        });
 
         if (student_created) {
           // is student data inserted
@@ -77,27 +95,150 @@ module.exports = {
   // @desc      Search students by noControl, nombre, apellidoP, apelliodoM, curp, nss
   // @access    Private
   search: async (req, res) => {
-    var { value } = req.params;
+    var { value } = req.query;
 
     if (value != "") {
-      const foundStudents = await AlumnoModel.find({
-        $or: [
-          {noControl: { $regex: value , $options: 'is'}},
-          {nombre: { $regex: value, $options: 'is'}},
-          {apellidoP: { $regex: value, $options: 'is' }},
-          {apellidoM: { $regex: value, $options: 'is' }},
-          {curp: { $regex: value, $options: 'is' }},
-          {nss: { $regex: value, $options: 'is' }}
+      const foundStudents = await AlumnoModel.find(
+        {
+          $or: [
+            { noControl: { $regex: `.*${value}.*`, $options: "is" } },
+            { nombre: { $regex: `.*${value}.*`, $options: "is" } },
+            { apellidoP: { $regex: `.*${value}.*`, $options: "is" } },
+            { apellidoM: { $regex: `.*${value}.*`, $options: "is" } },
+            { curp: { $regex: `.*${value}.*`, $options: "is" } },
+            { nss: { $regex: `.*${value}.*`, $options: "is" } },
+          ],
+        },
+        [
+          "noControl",
+          "nombre",
+          "apellidoP",
+          "apellidoM",
+          "semestre",
+          "grupo",
+          "status",
         ]
-      }, ["noControl", "nombre", "apellidoP", "apellidoM", "semestre", "grupo", "status"]);
+      );
 
-      if (foundStudents.length != 0) {
-        res.json({foundStudents});
+      res.send(foundStudents);
+    } else {
+      res.json({ empty: true });
+    }
+  },
+  // @route     GET /api/students/random
+  // @desc      Get 10 random students
+  // @access    Private
+  random: async (req, res) => {
+    const randomStudents = await AlumnoModel.aggregate([
+      { $sample: { size: 10 } },
+    ]);
+    res.send(randomStudents);
+  },
+  // @route     POST /api/students/createDocument
+  // @desc      Create a new document for a student
+  // @access    Private
+  createReporte: async (req, res) => {
+    const { noControl, ...data } = req.body;
+
+    const isCreated = await ReporteModel.create(data);
+
+    if (isCreated) {
+      var { reportes } = await AlumnoModel.findOne({ noControl }, ["reportes"]);
+      reportes.push(isCreated._id);
+
+      const update = await AlumnoModel.findOneAndUpdate(
+        { noControl },
+        { $set: { reportes } },
+        { new: true }
+      );
+
+      if (update) {
+        res.send({
+          error: false,
+          message: "Reporte creado correctamente.",
+        });
       } else {
-        res.json({match: false});
+        await reportes.deleteOne({ id: isCreated._id });
+        res.send({
+          error: true,
+          message: "Hubo un problema al crear el reporte.",
+        });
       }
     } else {
-      res.json({empty: true});
+      res.send({
+        error: true,
+        message: "Hubo un problema al crear el reporte.",
+      });
     }
-  }
+  },
+  createCitatorio: async (req, res) => {
+    const { noControl, ...data } = req.body;
+    const isCreated = await CitatorioModel.create(data);
+
+    if (isCreated) {
+      var { citatorios } = await AlumnoModel.findOne({ noControl }, [
+        "citatorios",
+      ]);
+      citatorios.push(isCreated._id);
+
+      const update = await AlumnoModel.findOneAndUpdate(
+        { noControl },
+        { $set: { citatorios } },
+        { new: true }
+      );
+
+      if (update) {
+        res.send({
+          error: false,
+          message: "Citatorio creado correctamente.",
+        });
+      } else {
+        await CitatorioModel.deleteOne({ id: isCreated._id });
+        res.send({
+          error: true,
+          message: "Hubo un problema al crear el citatorio.",
+        });
+      }
+    } else {
+      res.send({
+        error: true,
+        message: "Hubo un problema al crear el reporte de suspensión.",
+      });
+    }
+  },
+  createSuspension: async (req, res) => {
+    const { noControl, ...data } = req.body;
+    const isCreated = await SuspensionModel.create(data);
+
+    if (isCreated) {
+      var { suspensiones } = await AlumnoModel.findOne({ noControl }, [
+        "suspensiones",
+      ]);
+      suspensiones.push(isCreated._id);
+
+      const update = await AlumnoModel.findOneAndUpdate(
+        { noControl },
+        { $set: { suspensiones } },
+        { new: true }
+      );
+
+      if (update) {
+        res.send({
+          error: false,
+          message: "Reporte de suspensión creado correctamente.",
+        });
+      } else {
+        await SuspensionModel.deleteOne({ id: isCreated._id });
+        res.send({
+          error: true,
+          message: "Hubo un problema al crear el reporte de suspensión.",
+        });
+      }
+    } else {
+      res.send({
+        error: true,
+        message: "Hubo un problema al crear el reporte de suspensión.",
+      });
+    }
+  },
 };

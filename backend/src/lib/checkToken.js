@@ -20,6 +20,7 @@ helpers.checkToken = (req, res, next) => {
     next();
   } catch (error) {
     res.status(400).send("Token inválido.");
+    //res.status(400).send({ error });
   }
 };
 

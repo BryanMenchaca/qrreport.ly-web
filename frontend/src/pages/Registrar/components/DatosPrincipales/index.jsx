@@ -25,7 +25,12 @@ const DatosPrincipales = () => {
   return (
     <div className="box">
       <h5 className="font-weight-regular mb-4">Datos principales</h5>
-      <form className="row mt-2" onSubmit={handleSubmit} noValidate>
+      <form
+        id="student-data-form"
+        className="row mt-2"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div className="col-md-4">
           <InputField
             type="text"

@@ -16,11 +16,12 @@ const { checkToken } = require("./lib/checkToken");
 
 // Config
 const limit = rateLimit({
-  max: 100, // max requests
+  max: 5, // max requests
   windowMs: 60 * 60 * 1000, // 1 hour of 'ban' / lockout
   message: "Too many requests", // message to send
 });
 
+//app.set('trust proxy', 1);
 app.use(cors());
 app.use(helmet());
 //app.use(limit);
@@ -29,10 +30,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize());
 app.use(xss());
 app.use(morgan("dev"));
+app.disable("etag");
 
 // Routes
 app.use("/api/accounts/admin", require("./routes/admin.routes"));
 app.use("/api/students", checkToken, require("./routes/student.routes"));
+app.use("/api/groups", checkToken, require("./routes/group.routes"));
 
 // Starting server
 app.listen(PORT, () => {
