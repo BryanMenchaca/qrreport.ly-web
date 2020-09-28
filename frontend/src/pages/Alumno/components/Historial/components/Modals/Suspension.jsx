@@ -1,8 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import api from "../../../../../../services/students";
+import { StudentContext } from "../../../../common/context";
 
 import { InputField, TextArea } from "../../../../../../components/Inputs";
 
 const ModalSuspension = () => {
+  const {
+    state: {
+      studentData: { noControl },
+    },
+  } = useContext(StudentContext);
+
+  const initialState = {
+    folio: "",
+    fecha: "",
+    desde: "",
+    hasta: "",
+    motivo: "",
+    observaciones: "Sin observaciones.",
+  };
+
   const [data, setData] = useState({});
 
   const onChange = (e) => {
@@ -11,6 +28,22 @@ const ModalSuspension = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    api
+      .createDocument("suspension", {noControl, ...data})
+      .then((res) => {
+        if (res.error) {
+          alert(res.message);
+        } else {
+          alert(res.message);
+          document.querySelector("#formSuspension").reset();
+          setData(initialState);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -38,7 +71,7 @@ const ModalSuspension = () => {
             </button>
           </div>
           <div className="modal-body">
-            <form id="formSuspension" noValidate>
+            <form id="formSuspension" onSubmit={onSubmit} noValidate>
               <div className="form-group">
                 <InputField
                   type="text"

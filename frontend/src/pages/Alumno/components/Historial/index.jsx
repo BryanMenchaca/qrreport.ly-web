@@ -20,7 +20,7 @@ const Historial = () => {
         <div className="btn-group">
           <button
             type="button"
-            className="btn btn-danger btn-sm dropdown-toggle"
+            className="btn btn-danger btn-sm dropdown-toggle ignorePrint"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"

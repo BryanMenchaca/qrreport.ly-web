@@ -12,14 +12,18 @@ const ModalReporte = () => {
   } = useContext(StudentContext);
 
   const initialState = {
-    noControl,
     folio: "",
     fecha: "",
     motivo: "",
     observaciones: "Sin observaciones.",
+    docente: ""
   };
 
   const [data, setData] = useState(initialState);
+
+  useEffect(() => {
+    
+  }, [])
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +35,9 @@ const ModalReporte = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+    console.log(noControl);
     api
-      .createDocument("reporte", data)
+      .createDocument("reporte", {noControl, ...data})
       .then((res) => {
         if (res.error) {
           alert(res.message);

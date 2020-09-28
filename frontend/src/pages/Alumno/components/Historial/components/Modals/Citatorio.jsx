@@ -1,8 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import api from "../../../../../../services/students";
+import { StudentContext } from "../../../../common/context";
 
 import { InputField } from "../../../../../../components/Inputs";
 
 const MoldalCitatorio = () => {
+  const {
+    state: {
+      studentData: { noControl },
+    },
+  } = useContext(StudentContext);
+
+  const initialState = {
+    folio: "",
+    fecha: "",
+    fechaCita: "",
+    horaCita: "",
+    motivo: "",
+    observaciones: "Sin observaciones.",
+    docente: ""
+  };
+
   const [data, setData] = useState({});
 
   const onChange = (e) => {
@@ -11,6 +29,22 @@ const MoldalCitatorio = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    api
+      .createDocument("citatorio", {noControl, ...data})
+      .then((res) => {
+        if (res.error) {
+          alert(res.message);
+        } else {
+          alert(res.message);
+          document.querySelector("#formReporte").reset();
+          setData(initialState);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -38,7 +72,7 @@ const MoldalCitatorio = () => {
             </button>
           </div>
           <div className="modal-body">
-            <form id="formCitatorio" noValidate>
+            <form id="formCitatorio" onSubmit={onSubmit} noValidate>
               <div className="form-group">
                 <InputField
                   type="text"
@@ -86,6 +120,7 @@ const MoldalCitatorio = () => {
                   name="Docente"
                   label="Docente que cita"
                   onChange={onChange}
+                  autoComplete="on"
                 />
               </div>
               <div className="form-group float-right">

@@ -7,7 +7,6 @@ import api from "../../../../services/students";
 const VerificarDatos = () => {
   const { state, dispatch } = useContext(RegisterContext);
   const { studentData, ficha_medica } = state;
-  console.log(ficha_medica);
 
   const onSubmit = (e) => {
     e.preventDefault();
