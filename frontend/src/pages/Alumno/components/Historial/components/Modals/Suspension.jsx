@@ -22,6 +22,20 @@ const ModalSuspension = () => {
 
   const [data, setData] = useState({});
 
+  useEffect(() => {
+    api
+      .getFolio("suspension")
+      .then((res) => {
+        if (!res.error) {
+          setData((prevState) => ({
+            ...prevState,
+            folio: res.folio,
+          }));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -33,7 +47,7 @@ const ModalSuspension = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     api
-      .createDocument("suspension", {noControl, ...data})
+      .createDocument("suspension", { noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);
@@ -77,6 +91,7 @@ const ModalSuspension = () => {
                   type="text"
                   name="folio"
                   label="Folio"
+                  defaultValue={data.folio}
                   onChange={onChange}
                 />
               </div>

@@ -1,6 +1,10 @@
 const initialState = {
   loading: true,
-  studentData: {},
+  studentData: {
+    reportes: [],
+    citatorios: [],
+    suspensiones: [],
+  },
   fichaMedica: {},
 };
 

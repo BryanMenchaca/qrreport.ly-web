@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { StudentContext } from "../../common/context";
 
 /* Cards Items */
 import Reporte from "./components/SancionesItems/Reporte";
@@ -11,6 +12,26 @@ import ModalCitatorio from "./components/Modals/Citatorio";
 import ModalSuspension from "./components/Modals/Suspension";
 
 const Historial = () => {
+  const [historialArray, setHistorialArray] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  var {
+    state: {
+      studentData: { reportes, citatorios, suspensiones },
+    },
+  } = useContext(StudentContext);
+
+  useEffect(() => {
+    var sanciones = [...reportes, ...citatorios, ...suspensiones];
+    if (sanciones.length !== 0) {
+      sanciones.sort((a, b) => new Date(a.fecha) > new Date(b.fecha));
+      setHistorialArray(sanciones);
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
+    }
+  }, [reportes, citatorios, suspensiones]);
+
   return (
     <div>
       <ModalReporte />
@@ -56,32 +77,49 @@ const Historial = () => {
         </div>
       </div>
       <div className="box">
-        <Reporte
-          fecha="12 de abr. de 2019"
-          motivo="Falta de respeto a maestra"
-          observaciones="Le faltó al respeto a la maestra Brenda Zavala"
-          docente="Ing. Maxim Jimenez"
-          folio="F001"
-        />
-        <div className="dropdown-divider my-4"></div>
-        <Citatorio
-          fecha="23 de nov. de 2019"
-          motivo="Demostración de afecto en conferencia"
-          observaciones="Demostración de afecto y falta de respeto a expositores en conferencia"
-          fechaCita="24 de nov. de 2019"
-          horaCita="16:10"
-          folio="F006"
-          asistencia={true}
-        />
-        <div className="dropdown-divider my-4"></div>
-        <Suspension
-          fecha="26 de nov. de 2019"
-          motivo="Romper una ventana"
-          observaciones="Al estar arrojando piedras rompió una ventana del salón"
-          desde="27 de nov. de 2019"
-          hasta="30 de nov. de 2019"
-          folio="F002"
-        />
+        {isEmpty ? (
+          <p>No hay sanciones.</p>
+        ) : (
+          historialArray.map((item, index) => {
+            if (item.type === "Reporte") {
+              return (
+                <Reporte
+                  fecha={item.fecha}
+                  motivo={item.motivo}
+                  observaciones={item.observaciones}
+                  docente={item.docente}
+                  folio={item.folio}
+                  key={index}
+                />
+              );
+            } else if (item.type === "Citatorio") {
+              return (
+                <Citatorio
+                  fecha={item.fecha}
+                  motivo={item.motivo}
+                  observaciones={item.observaciones}
+                  fechaCita={item.fechaCita}
+                  horaCita={item.horaCita}
+                  folio={item.folio}
+                  asistencia={item.asistencia}
+                  key={index}
+                />
+              );
+            } else if (item.type === "Suspension") {
+              return (
+                <Suspension
+                  fecha={item.fecha}
+                  motivo={item.motivo}
+                  observaciones={item.observaciones}
+                  desde={item.desde}
+                  hasta={item.hasta}
+                  folio={item.folio}
+                  key={index}
+                />
+              );
+            }
+          })
+        )}
       </div>
     </div>
   );

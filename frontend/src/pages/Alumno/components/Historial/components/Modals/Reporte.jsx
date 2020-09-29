@@ -16,14 +16,24 @@ const ModalReporte = () => {
     fecha: "",
     motivo: "",
     observaciones: "Sin observaciones.",
-    docente: ""
+    docente: "",
   };
 
   const [data, setData] = useState(initialState);
 
   useEffect(() => {
-    
-  }, [])
+    api
+      .getFolio("reporte")
+      .then((res) => {
+        if (!res.error) {
+          setData((prevState) => ({
+            ...prevState,
+            folio: res.folio,
+          }));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -35,9 +45,9 @@ const ModalReporte = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(noControl);
+    console.log(data);
     api
-      .createDocument("reporte", {noControl, ...data})
+      .createDocument("reporte", { noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);
@@ -81,6 +91,7 @@ const ModalReporte = () => {
                   type="text"
                   name="folio"
                   label="Folio"
+                  defaultValue={data.folio}
                   onChange={onChange}
                   required
                 />

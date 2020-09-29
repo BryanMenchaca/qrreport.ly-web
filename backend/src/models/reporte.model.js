@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const reporteSchema = new Schema(
   {
+    type: { type: String, default: "Reporte" },
     folio: String,
     noControl: String,
     fecha: { type: Date, default: Date.now },

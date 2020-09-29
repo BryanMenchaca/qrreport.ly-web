@@ -17,7 +17,7 @@ module.exports = {
 
     const studentData = await AlumnoModel.findOne({
       noControl: parseInt(noControl),
-    });
+    }).populate(["reportes", "citatorios", "suspensiones"]);
 
     const fichaMedica = await FichaModel.findOne({
       noControl: parseInt(noControl),

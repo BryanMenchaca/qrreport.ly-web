@@ -18,10 +18,24 @@ const MoldalCitatorio = () => {
     horaCita: "",
     motivo: "",
     observaciones: "Sin observaciones.",
-    docente: ""
+    docente: "",
   };
 
   const [data, setData] = useState({});
+
+  useEffect(() => {
+    api
+      .getFolio("citatorio")
+      .then((res) => {
+        if (!res.error) {
+          setData((prevState) => ({
+            ...prevState,
+            folio: res.folio,
+          }));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +48,7 @@ const MoldalCitatorio = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     api
-      .createDocument("citatorio", {noControl, ...data})
+      .createDocument("citatorio", { noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);
@@ -78,6 +92,7 @@ const MoldalCitatorio = () => {
                   type="text"
                   name="folio"
                   label="Folio"
+                  defaultValue={data.folio}
                   onChange={onChange}
                 />
               </div>

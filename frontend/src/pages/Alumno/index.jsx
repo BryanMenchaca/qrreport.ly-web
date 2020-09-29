@@ -13,16 +13,20 @@ const Index = ({ match }) => {
   return (
     <StudentProvider>
       <div className="row mt-4">
-        <div className="col-md-4 col-lg-3">
+        <div className="col-md-4">
           {/* Left content section */}
           <Info noControl={noControl} />
           <Opciones />
         </div>
-        <div className="col-md-8 col-lg-9">
+        <div className="col-md-8">
           {" "}
           {/* Right content section */}
           {/* Start blue top menu */}
-          <ul className="nav nav-pills mb-3 ignorePrint" id="pills-tab" role="tablist">
+          <ul
+            className="nav nav-pills mb-3 ignorePrint"
+            id="pills-tab"
+            role="tablist"
+          >
             <li className="nav-item" role="presentation">
               <a
                 className="nav-link active"

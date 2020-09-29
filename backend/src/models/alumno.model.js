@@ -11,12 +11,12 @@ const alumnoSchema = new Schema(
     grupo: String,
     especialidad: String,
     generacion: String,
-    reportes: [{ type: Schema.Types.ObjectId, ref: "Reportes" }],
-    citatorios: [{ type: Schema.Types.ObjectId, ref: "Citatorios" }],
-    suspensiones: [{ type: Schema.Types.ObjectId, ref: "Suspensiones" }],
+    reportes: [{ type: Schema.Types.ObjectId, ref: "Reporte" }],
+    citatorios: [{ type: Schema.Types.ObjectId, ref: "Citatorio" }],
+    suspensiones: [{ type: Schema.Types.ObjectId, ref: "Suspension" }],
     curp: String,
     nss: String,
-    status: Boolean
+    status: Boolean,
   },
   { collection: "alumnos" }
 );

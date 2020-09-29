@@ -34,10 +34,16 @@ const createDocument = async (route, documentData) => {
   return data;
 };
 
+const getFolio = async (type) => {
+  const { data } = await axios.get(`${host}/getFolio/${type}`, headers);
+  return data;
+};
+
 export default {
   getRandomStudents,
   search,
   registerStudent,
   getStudentInfo,
   createDocument,
+  getFolio,
 };

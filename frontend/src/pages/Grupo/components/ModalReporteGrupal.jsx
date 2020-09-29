@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import api from "../../../services/groups";
+import apiGroup from "../../../services/groups";
+import apiStudent from "../../../services/students";
 
 import { InputField, TextArea } from "../../../components/Inputs";
 
@@ -16,6 +17,20 @@ const ModalReporteGrupal = ({ grupo, generacion }) => {
 
   const [data, setData] = useState(initialState);
 
+  useEffect(() => {
+    apiStudent
+      .getFolio("reporteGrupal")
+      .then((res) => {
+        if (!res.error) {
+          setData((prevState) => ({
+            ...prevState,
+            folio: res.folio,
+          }));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -26,7 +41,7 @@ const ModalReporteGrupal = ({ grupo, generacion }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    api
+    apiGroup
       .createDocument(data)
       .then((res) => {
         if (res.error) {
@@ -71,6 +86,7 @@ const ModalReporteGrupal = ({ grupo, generacion }) => {
                   type="text"
                   name="folio"
                   label="Folio"
+                  defaultValue={data.folio}
                   onChange={onChange}
                   required
                 />

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const citatorioSchema = new Schema(
   {
+    type: { type: String, default: "Citatorio" },
     folio: String,
     noControl: String,
     fecha: { type: Date, default: Date.now },
