@@ -39,6 +39,11 @@ const getFolio = async (type) => {
   return data;
 };
 
+const edit = async (newData) => {
+  const { data } = await axios.post(`${host}/edit`, newData, headers);
+  return data;
+};
+
 export default {
   getRandomStudents,
   search,
@@ -46,4 +51,5 @@ export default {
   getStudentInfo,
   createDocument,
   getFolio,
+  edit,
 };

@@ -126,12 +126,73 @@ module.exports = {
     }
   },
   // @route     GET /api/students/random
-  // @desc      Get 10 random students
+  // @desc      Get 10 random students to show in Search Page in frontend
   // @access    Private
   random: async (req, res) => {
     const randomStudents = await AlumnoModel.aggregate([
       { $sample: { size: 10 } },
     ]);
     res.send(randomStudents);
+  },
+  // @route     POST /api/students/edit
+  // @desc      Get 10 random students
+  // @access    Private
+  edit: async (req, res) => {
+    const {
+      noControl,
+      apellidoP,
+      apellidoM,
+      nombre,
+      semestre,
+      grupo,
+      especialidad,
+      generacion,
+      curp,
+      nss,
+      reportes,
+      citatorios,
+      suspensiones,
+      status,
+      ...fichaMedica
+    } = req.body;
+
+    const editAlumno = await AlumnoModel.findOneAndUpdate({ noControl }, [
+      {
+        $set: {
+          noControl,
+          apellidoP,
+          apellidoM,
+          nombre,
+          semestre,
+          grupo,
+          especialidad,
+          generacion,
+          curp,
+          nss,
+        },
+      },
+    ]);
+
+    if (editAlumno) {
+      const editFichaMedica = await FichaModel.findOneAndUpdate(
+        { noControl },
+        { $set: { ...fichaMedica } }
+      );
+
+      if (editFichaMedica) {
+        res.send({ error: false, message: "Datos actualizados correctamente" });
+      } else {
+        res.send({
+          error: false,
+          message:
+            "Hubo un problema al actualizar los datos de la ficha médica.",
+        });
+      }
+    } else {
+      res.send({
+        error: false,
+        message: "Hubo un problema al actualizar los datos.",
+      });
+    }
   },
 };
