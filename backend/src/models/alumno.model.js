@@ -15,7 +15,7 @@ const alumnoSchema = new Schema(
     citatorios: [{ type: Schema.Types.ObjectId, ref: "Citatorio" }],
     suspensiones: [{ type: Schema.Types.ObjectId, ref: "Suspension" }],
     curp: String,
-    nss: String,
+    nss: { type: String, default: "" },
     status: Boolean,
   },
   { collection: "alumnos" }

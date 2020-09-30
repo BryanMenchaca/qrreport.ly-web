@@ -4,8 +4,9 @@ import { MoreVert } from "@material-ui/icons";
 
 const Reporte = (props) => {
   const { fecha, motivo, observaciones, docente, folio } = props;
+
   return (
-    <div>
+    <div className="box mt-2">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
           <small>{moment(fecha).format("ll")} - Reporte</small>
@@ -39,7 +40,6 @@ const Reporte = (props) => {
           <small>{folio >= 10 ? `F0${folio}` : `F00${folio}`}</small>
         </p>
       </div>
-      <div className="dropdown-divider my-4"></div>
     </div>
   );
 };

@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { StudentContext } from "../../common/context";
 
-/* Cards Items */
-import Reporte from "./components/SancionesItems/Reporte";
-import Citatorio from "./components/SancionesItems/Citatorio";
-import Suspension from "./components/SancionesItems/Suspension";
-
 /* Modals Forms */
 import ModalReporte from "./components/Modals/Reporte";
 import ModalCitatorio from "./components/Modals/Citatorio";
 import ModalSuspension from "./components/Modals/Suspension";
 
+import RenderHistorial from "./components/RenderHistorial"
+
 const Historial = () => {
+  const [loading, setLoading] = useState(true);
   const [historialArray, setHistorialArray] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -27,8 +25,10 @@ const Historial = () => {
       sanciones.sort((a, b) => new Date(a.fecha) > new Date(b.fecha));
       setHistorialArray(sanciones);
       setIsEmpty(false);
+      setLoading(false);
     } else {
       setIsEmpty(true);
+      setLoading(false)
     }
   }, [reportes, citatorios, suspensiones]);
 
@@ -76,51 +76,15 @@ const Historial = () => {
           </div>
         </div>
       </div>
-      <div className="box">
-        {isEmpty ? (
-          <p>No hay sanciones.</p>
+        {loading ? (
+          <div className="box text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
         ) : (
-          historialArray.map((item, index) => {
-            if (item.type === "Reporte") {
-              return (
-                <Reporte
-                  fecha={item.fecha}
-                  motivo={item.motivo}
-                  observaciones={item.observaciones}
-                  docente={item.docente}
-                  folio={item.folio}
-                  key={index}
-                />
-              );
-            } else if (item.type === "Citatorio") {
-              return (
-                <Citatorio
-                  fecha={item.fecha}
-                  motivo={item.motivo}
-                  observaciones={item.observaciones}
-                  fechaCita={item.fechaCita}
-                  horaCita={item.horaCita}
-                  folio={item.folio}
-                  asistencia={item.asistencia}
-                  key={index}
-                />
-              );
-            } else if (item.type === "Suspension") {
-              return (
-                <Suspension
-                  fecha={item.fecha}
-                  motivo={item.motivo}
-                  observaciones={item.observaciones}
-                  desde={item.desde}
-                  hasta={item.hasta}
-                  folio={item.folio}
-                  key={index}
-                />
-              );
-            }
-          })
+          <RenderHistorial historialArray={historialArray} isEmpty={isEmpty} />
         )}
-      </div>
     </div>
   );
 };

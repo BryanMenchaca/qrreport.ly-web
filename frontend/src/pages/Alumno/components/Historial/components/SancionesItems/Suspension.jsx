@@ -4,7 +4,7 @@ import { MoreVert } from "@material-ui/icons";
 const Suspension = (props) => {
   const { fecha, motivo, observaciones, desde, hasta, folio } = props;
   return (
-    <div>
+    <div className="box mt-2">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
           <small>{fecha} - Reporte de suspensión</small>

@@ -12,7 +12,7 @@ const Citatorio = (props) => {
     asistencia,
   } = props;
   return (
-    <div>
+    <div className="box mt-2">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
           <small>{fecha} - Citatorio</small>

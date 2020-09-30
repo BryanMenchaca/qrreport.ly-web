@@ -11,6 +11,7 @@ import Grupos from "./Grupos";
 import Grupo from "./Grupo";
 import Registrar from "./Registrar";
 import Alumno from "./Alumno";
+import Editar from "./Editar"
 
 const DashboardPage = () => {
   return (
@@ -21,6 +22,7 @@ const DashboardPage = () => {
       <Route exact path={routes.grupo} component={Grupo} />
       <Route exact path={routes.registrar} component={Registrar} />
       <Route exact path={routes.alumno} component={Alumno} />
+      <Route exact path={routes.editar} component={Editar} />
     </Switch>
   );
 };

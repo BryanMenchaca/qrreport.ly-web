@@ -6,4 +6,5 @@ export default {
   grupos: "/dashboard/grupos",
   grupo: "/dashboard/grupo/:grupo/:generacion",
   alumno: "/dashboard/alumno/:noControl",
+  editar: "/dashboard/editar/:noControl"
 };
