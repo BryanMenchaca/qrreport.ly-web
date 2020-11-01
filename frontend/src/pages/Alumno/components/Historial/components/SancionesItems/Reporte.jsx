@@ -6,7 +6,7 @@ const Reporte = (props) => {
   const { fecha, motivo, observaciones, docente, folio } = props;
 
   return (
-    <div className="box mt-2">
+    <div className="box mt-3">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
           <small>{moment(fecha).format("ll")} - Reporte</small>

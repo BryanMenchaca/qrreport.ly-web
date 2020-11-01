@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { MoreVert, Done, Clear } from "@material-ui/icons";
 
 const Citatorio = (props) => {
@@ -12,10 +13,10 @@ const Citatorio = (props) => {
     asistencia,
   } = props;
   return (
-    <div className="box mt-2">
+    <div className="box mt-3">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
-          <small>{fecha} - Citatorio</small>
+          <small>{moment(fecha).format("ll")} - Citatorio</small>
         </p>
         <a
           className="text-secondary"
@@ -41,18 +42,17 @@ const Citatorio = (props) => {
           <small>Fecha y hora de cita:</small>
           <br />
           <small className="text-dark">
-            {fechaCita} a las {horaCita} hrs.
+            {moment(fechaCita).format("ll")} a las {horaCita} hrs.
           </small>
         </p>
         <p className="text-secondary mr-2">
-          <small>{folio}</small>
+          <small>{folio >= 10 ? `F0${folio}` : `F00${folio}`}</small>
         </p>
       </div>
       <p className="text-secondary">
         <small className="mr-2">Asistió:</small>
         <small className="text-dark">{asistencia ? <Done /> : <Clear />}</small>
       </p>
-      <div className="dropdown-divider my-4"></div>
     </div>
   );
 };

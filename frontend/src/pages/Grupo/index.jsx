@@ -84,7 +84,7 @@ const Grupo = ({ match }) => {
                         <td>{student.suspensiones.length}</td>
                         <td className="ignorePrint">
                           <Link
-                            to="/dashboard/alumno"
+                            to={`/dashboard/alumno/${student.noControl}`}
                             className="btn btn-sm btn-light"
                           >
                             <MoreHoriz className="text-info" /> Ver más

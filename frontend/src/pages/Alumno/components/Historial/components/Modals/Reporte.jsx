@@ -1,27 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
-import api from "../../../../../../services/students";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { StudentContext } from "../../../../common/context";
-
 import { InputField, TextArea } from "../../../../../../components/Inputs";
+import api from "../../../../../../services/students";
+
+const initialState = {
+  folio: "",
+  fecha: "",
+  motivo: "",
+  observaciones: "Sin observaciones.",
+  docente: "",
+};
 
 const ModalReporte = () => {
-  const {
-    state: {
-      studentData: { noControl },
-    },
-  } = useContext(StudentContext);
-
-  const initialState = {
-    folio: "",
-    fecha: "",
-    motivo: "",
-    observaciones: "Sin observaciones.",
-    docente: "",
-  };
-
+  const { state } = useContext(StudentContext);
   const [data, setData] = useState(initialState);
 
-  useEffect(() => {
+  const getFolio = useCallback(() => {
     api
       .getFolio("reporte")
       .then((res) => {
@@ -35,6 +29,8 @@ const ModalReporte = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => getFolio(), [getFolio]);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -45,9 +41,8 @@ const ModalReporte = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     api
-      .createDocument("reporte", { noControl, ...data })
+      .createDocument("reporte", { noControl: state.noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);
@@ -55,6 +50,7 @@ const ModalReporte = () => {
           alert(res.message);
           document.querySelector("#formReporte").reset();
           setData(initialState);
+          getFolio();
         }
       })
       .catch((err) => console.log(err));
@@ -130,7 +126,7 @@ const ModalReporte = () => {
                   type="text"
                   name="docente"
                   label="Docente que reporta"
-                  autoComplete="off"
+                  autoComplete="on"
                   onChange={onChange}
                   required
                 />

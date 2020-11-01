@@ -1,21 +1,23 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { StudentContext } from "../../common/context";
 import { EditOutlined, PrintOutlined, ArrowDownward } from "@material-ui/icons";
 
 const Opciones = () => {
-  const {
-    state: {
-      loading,
-      studentData: { noControl },
-    },
-  } = useContext(StudentContext);
+  const { state } = useContext(StudentContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (state.noControl?.length !== 0) {
+      setLoading(false);
+    }
+  }, [state.noControl]);
 
   return (
     <div className="box mt-4 ignorePrint">
       <h5 className="mb-4">Opciones</h5>
       <Link
-        to={`/dashboard/editar/${noControl}`}
+        to={`/dashboard/editar/${state.noControl}`}
         className="btn btn-light btn-sm w-100 mb-3"
         disabled={loading}
       >

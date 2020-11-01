@@ -1,22 +1,28 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import imgDefault from "../../../../assets/default.png";
 import { StudentContext } from "../../common/context";
 import api from "../../../../services/students";
 
 const Info = ({ noControl }) => {
-  const { state, dispatch } = useContext(StudentContext);
-  const { studentData } = state;
+  const [loading, setLoading] = useState(true);
+  const [studentData, setStudentData] = useState({});
+
+  const { dispatch } = useContext(StudentContext);
 
   useEffect(() => {
-    api
-      .getStudentInfo(noControl)
-      .then((res) => {
-        dispatch({ type: "SET_LOADING", payload: res });
-      })
-      .catch((err) => console.log(err));
+    if (noControl.length !== 0) {
+      api
+        .getStudentInfo(noControl)
+        .then((res) => {
+          dispatch({ type: "SET_STUDENT_ID", payload: noControl });
+          setStudentData(res.studentData);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [noControl, dispatch]);
 
-  if (!state.loading) {
+  if (!loading) {
     return (
       <div className="box">
         <div className="row">

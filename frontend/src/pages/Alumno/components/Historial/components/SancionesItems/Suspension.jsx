@@ -1,13 +1,14 @@
 import React from "react";
+import moment from "moment";
 import { MoreVert } from "@material-ui/icons";
 
 const Suspension = (props) => {
   const { fecha, motivo, observaciones, desde, hasta, folio } = props;
   return (
-    <div className="box mt-2">
+    <div className="box mt-3">
       <div className="d-flex">
         <p className="text-secondary mr-auto">
-          <small>{fecha} - Reporte de suspensión</small>
+          <small>{moment(fecha).format("ll")} - Reporte de suspensión</small>
         </p>
         <a
           className="text-secondary"
@@ -33,14 +34,14 @@ const Suspension = (props) => {
           <small>Periodo de suspensión:</small>
           <br />
           <small className="text-dark">
-            Desde el {desde} hasta {hasta}
+            Desde el {moment(desde).format("ll")} hasta{" "}
+            {moment(hasta).format("ll")}
           </small>
         </p>
         <p className="text-secondary mr-2">
-          <small>{folio}</small>
+          <small>{folio >= 10 ? `F0${folio}` : `F00${folio}`}</small>
         </p>
       </div>
-      <div className="dropdown-divider my-4"></div>
     </div>
   );
 };

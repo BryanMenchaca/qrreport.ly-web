@@ -1,43 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { StudentContext } from "../../common/context";
+import { Replay } from "@material-ui/icons";
+import api from "../../../../services/students";
 
 /* Modals Forms */
 import ModalReporte from "./components/Modals/Reporte";
 import ModalCitatorio from "./components/Modals/Citatorio";
 import ModalSuspension from "./components/Modals/Suspension";
 
-import RenderHistorial from "./components/RenderHistorial"
+import RenderHistorial from "./components/RenderHistorial";
 
 const Historial = () => {
+  const { state } = useContext(StudentContext);
   const [loading, setLoading] = useState(true);
   const [historialArray, setHistorialArray] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(false);
 
-  var {
-    state: {
-      studentData: { reportes, citatorios, suspensiones },
-    },
-  } = useContext(StudentContext);
-
-  useEffect(() => {
-    var sanciones = [...reportes, ...citatorios, ...suspensiones];
-    if (sanciones.length !== 0) {
-      sanciones.sort((a, b) => new Date(a.fecha) > new Date(b.fecha));
-      setHistorialArray(sanciones);
-      setIsEmpty(false);
-      setLoading(false);
-    } else {
-      setIsEmpty(true);
-      setLoading(false)
+  const fetchData = useCallback(() => {
+    setLoading(true);
+    if (state.noControl.length !== 0) {
+      api
+        .getStudentInfo(state.noControl)
+        .then(({ studentData }) => {
+          setHistorialArray([
+            ...studentData.reportes,
+            ...studentData.citatorios,
+            ...studentData.suspensiones,
+          ]);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
     }
-  }, [reportes, citatorios, suspensiones]);
+  }, [state.noControl]);
+
+  useEffect(() => fetchData(), [fetchData]);
 
   return (
-    <div>
+    <>
       <ModalReporte />
       <ModalCitatorio />
       <ModalSuspension />
-      <div className="d-flex justify-content-end ignorePrint mb-3">
+      <div className="d-flex justify-content-between align-middle ignorePrint mb-3">
+        <button className="btn btn-light btn-sm" onClick={fetchData}>
+          <Replay className="text-muted" />
+        </button>
         <div className="btn-group">
           <button
             type="button"
@@ -76,16 +81,16 @@ const Historial = () => {
           </div>
         </div>
       </div>
-        {loading ? (
-          <div className="box text-center">
-            <div className="spinner-border text-primary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
+      {loading ? (
+        <div className="box text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
-        ) : (
-          <RenderHistorial historialArray={historialArray} isEmpty={isEmpty} />
-        )}
-    </div>
+        </div>
+      ) : (
+        <RenderHistorial historialArray={historialArray} />
+      )}
+    </>
   );
 };
 

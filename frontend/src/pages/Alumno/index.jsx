@@ -7,7 +7,7 @@ import FichaMedica from "./components/FichaMedica";
 import Historial from "./components/Historial";
 import Opciones from "./components/Opciones";
 
-const Index = ({ match }) => {
+const Alumno = ({ match }) => {
   const { noControl } = match.params;
 
   return (
@@ -100,4 +100,4 @@ const Index = ({ match }) => {
   );
 };
 
-export default Index;
+export default Alumno;

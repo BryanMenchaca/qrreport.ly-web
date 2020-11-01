@@ -1,21 +1,19 @@
 const initialState = {
-  loading: true,
+  noControl: "",
   studentData: {
     reportes: [],
     citatorios: [],
     suspensiones: [],
   },
-  fichaMedica: {},
 };
 
 const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "SET_LOADING":
+    case "SET_STUDENT_ID":
       return {
         ...state,
-        loading: false,
-        ...payload,
+        noControl: payload,
       };
     default:
       return state;

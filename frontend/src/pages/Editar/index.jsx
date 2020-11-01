@@ -70,24 +70,28 @@ const Editar = ({ match, history }) => {
                 label="Número de control"
                 name="noControl"
                 defaultValue={studentData.noControl}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Nombre(s)"
                 name="nombre"
                 defaultValue={studentData.nombre}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Apellido Paterno"
                 name="apellidoP"
                 defaultValue={studentData.apellidoP}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Apellido Materno"
                 name="apellidoM"
                 defaultValue={studentData.apellidoM}
+                onChange={onChange}
               />
             </div>
             <div className="col-md-4">
@@ -96,24 +100,28 @@ const Editar = ({ match, history }) => {
                 label="Semestre"
                 name="semestre"
                 defaultValue={studentData.semestre}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Grupo"
                 name="grupo"
                 defaultValue={studentData.grupo}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Especialidad"
                 name="especialidad"
                 defaultValue={studentData.especialidad}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Generacion"
                 name="generacion"
                 defaultValue={studentData.generacion}
+                onChange={onChange}
               />
             </div>
             <div className="col-md-4">
@@ -122,12 +130,14 @@ const Editar = ({ match, history }) => {
                 label="CURP"
                 name="curp"
                 defaultValue={studentData.curp}
+                onChange={onChange}
               />
               <InputField
                 type="text"
                 label="Número de seguridad social"
                 name="nss"
                 defaultValue={studentData.nss}
+                onChange={onChange}
               />
             </div>
           </div>
@@ -141,6 +151,7 @@ const Editar = ({ match, history }) => {
                   cols="30"
                   rows="2"
                   defaultValue={fichaMedica.padecimientos}
+                  onChange={onChange}
                 />
               </div>
               <div className="col-md-6">
@@ -150,6 +161,7 @@ const Editar = ({ match, history }) => {
                   cols="30"
                   rows="2"
                   defaultValue={fichaMedica.notas_medicas}
+                  onChange={onChange}
                 />
               </div>
             </div>
@@ -161,6 +173,7 @@ const Editar = ({ match, history }) => {
                   cols="30"
                   rows="2"
                   defaultValue={fichaMedica.alergias_reacciones}
+                  onChange={onChange}
                 />
               </div>
               <div className="col-md-6">
@@ -170,15 +183,18 @@ const Editar = ({ match, history }) => {
                   cols="30"
                   rows="2"
                   defaultValue={fichaMedica.medicamentos}
+                  onChange={onChange}
                 />
               </div>
             </div>
             <div className="row mt-4">
               <div className="col-md-4">
                 <InputField
+                  type="text"
                   label="Grupo sanguíneo"
                   name="grupo_sanguineo"
                   defaultValue={fichaMedica.grupo_sanguineo}
+                  onChange={onChange}
                 />
               </div>
               <div className="form-group col-md-4">
@@ -191,6 +207,7 @@ const Editar = ({ match, history }) => {
                     className="form-control custom-form-control"
                     name="estatura"
                     defaultValue={fichaMedica.estatura}
+                    onChange={onChange}
                   />
                   <div className="input-group-append">
                     <span className="input-group-text">cm</span>
@@ -207,6 +224,7 @@ const Editar = ({ match, history }) => {
                     className="form-control custom-form-control"
                     name="peso"
                     defaultValue={fichaMedica.peso}
+                    onChange={onChange}
                   />
                   <div className="input-group-append">
                     <span className="input-group-text">kg</span>
@@ -226,6 +244,7 @@ const Editar = ({ match, history }) => {
                   label="Parentesco"
                   name="parentesco"
                   defaultValue={fichaMedica.contacto_emergencia.parentesco}
+                  onChange={onChange}
                 />
               </div>
               <div className="col-md-3">
@@ -234,6 +253,7 @@ const Editar = ({ match, history }) => {
                   label="Nombre y apellido"
                   name="nombre_parentesco"
                   defaultValue={fichaMedica.contacto_emergencia.nombre}
+                  onChange={onChange}
                 />
               </div>
               <div className="col-md-3">
@@ -244,6 +264,7 @@ const Editar = ({ match, history }) => {
                     name="telefono"
                     className="form-control custom-form-control"
                     defaultValue={fichaMedica.contacto_emergencia.telefono}
+                    onChange={onChange}
                   />
                 </div>
               </div>
@@ -252,6 +273,7 @@ const Editar = ({ match, history }) => {
                   label="Etiqueta"
                   name="etiqueta"
                   defaultValue={fichaMedica.contacto_emergencia.etiqueta}
+                  onChange={onChange}
                 />
               </div>
             </div>
