@@ -10,9 +10,10 @@ module.exports = {
   // @access    Private
   folio: async (req, res) => {
     const { x } = req.params;
-    var last = [], folio = 0;
+    var last = [],
+      folio = 0;
 
-    // Get last document "folio" of a collection type 
+    // Get last document "folio" of a collection type
     switch (x) {
       case "reporte":
         last = await ReporteModel.find().sort({ $natural: -1 }).limit(1);
@@ -145,5 +146,9 @@ module.exports = {
         message: "Hubo un problema al crear el reporte de suspensión.",
       });
     }
+  },
+  getHistory: async (req, res) => {
+    const params = req.query;
+    console.log(params);
   },
 };

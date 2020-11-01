@@ -14,6 +14,7 @@ const {
   createReporte,
   createCitatorio,
   createSuspension,
+  getHistory,
 } = require("../controllers/sancion.controller");
 
 router.get("/getOne/:noControl", getOne);
@@ -26,5 +27,6 @@ router.post("/edit", edit);
 router.post("/createDocument/reporte", createReporte);
 router.post("/createDocument/citatorio", createCitatorio);
 router.post("/createDocument/suspension", createSuspension);
+router.get("/getHistory", getHistory);
 
 module.exports = router;

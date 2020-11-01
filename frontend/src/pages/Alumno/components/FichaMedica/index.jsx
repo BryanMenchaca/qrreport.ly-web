@@ -24,7 +24,7 @@ const FichaMedica = () => {
 
   if (!loading) {
     return (
-      <div className="box mt-4">
+      <div className="box">
         <div className="d-flex mb-2">
           <img src={starOfLife} alt="medic" className="mr-2" height="25px" />
           <h5 className="text-danger mr-auto">Ficha médica</h5>

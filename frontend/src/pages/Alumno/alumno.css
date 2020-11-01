@@ -28,6 +28,29 @@
   font-size: 15px;
 }
 
+.img-student {
+  width: 120px;
+  height: 120px;
+  background: #ffffff;
+  border-radius: 75%;
+  text-align: center;
+  position: absolute;
+  top: -85px;
+}
+
+.img-student img {
+  margin-top: 5px;
+  border-radius: 75%;
+}
+
+.student-name {
+  margin-top: 50px;
+}
+
+.student-container {
+  max-width: 1080px;
+}
+
 @media (max-width: 768px) {
   #student-photo {
     width: 120px;

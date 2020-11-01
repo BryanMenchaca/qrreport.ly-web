@@ -24,50 +24,15 @@ const Info = ({ noControl }) => {
 
   if (!loading) {
     return (
-      <div className="box">
+      <div className="box mt-4">
         <div className="row">
-          <div className="col-md-12 d-flex">
-            <img
-              src={imgDefault}
-              alt="student"
-              className="rounded-circle"
-              id="student-photo"
-              width="100px"
-            />
-            <h6 className="my-auto ml-4" style={{ fontSize: 19 }}>
+          <div className="col-md-12 text-center d-flex justify-content-center">
+            <div className="img-student">
+              <img src={imgDefault} alt="student" width="110px" />
+            </div>
+            <h4 className="student-name">
               {`${studentData.nombre} ${studentData.apellidoP} ${studentData.apellidoM}`}
-            </h6>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="custom-badge">{`${studentData.especialidad}`}</div>
-          </div>
-        </div>
-        <div className="row d-flex">
-          <div className="col-md-6">
-            <ul
-              className="list-unstyled"
-              style={{ fontSize: 15, fontWeight: 600 }}
-            >
-              <li className="mb-2">Semestre</li>
-              <li className="mb-2">Grupo</li>
-              <li className="mb-2">Generación</li>
-              <li className="mb-2">Estatus</li>
-            </ul>
-          </div>
-          <div className="col-md-6">
-            <ul
-              className="list-unstyled"
-              style={{ fontSize: 15, fontWeight: 400 }}
-            >
-              <li className="mb-2">{`${studentData.semestre}`}</li>
-              <li className="mb-2">{`${studentData.grupo}`}</li>
-              <li className="mb-2">{`${studentData.generacion}`}</li>
-              <li className="mb-2">
-                {studentData.status ? "Cursando" : "Baja"}
-              </li>
-            </ul>
+            </h4>
           </div>
         </div>
       </div>

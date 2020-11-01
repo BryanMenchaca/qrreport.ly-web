@@ -44,6 +44,14 @@ const edit = async (newData) => {
   return data;
 };
 
+const getFilteredHistory = async ({ noControl, date, type }) => {
+  const { data } = await axios.get(
+    `${host}/getHistory?noControl=${noControl}&date=${date}&type=${type}`,
+    headers
+  );
+  return data;
+};
+
 export default {
   getRandomStudents,
   search,
@@ -52,4 +60,5 @@ export default {
   createDocument,
   getFolio,
   edit,
+  getFilteredHistory,
 };
