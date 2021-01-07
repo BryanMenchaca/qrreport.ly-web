@@ -20,12 +20,12 @@ const Historial = () => {
     setLoading(true);
     if (state.noControl.length !== 0) {
       api
-        .getStudentInfo(state.noControl)
-        .then(({ studentData }) => {
+        .getHistory(state.noControl)
+        .then((res) => {
           setHistorialArray([
-            ...studentData.reportes,
-            ...studentData.citatorios,
-            ...studentData.suspensiones,
+            ...res.reportes,
+            ...res.citatorios,
+            ...res.suspensiones,
           ]);
           setLoading(false);
         })

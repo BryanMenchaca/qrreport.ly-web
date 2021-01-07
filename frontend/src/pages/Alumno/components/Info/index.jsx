@@ -1,39 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
-import imgDefault from "../../../../assets/default.png";
+import React, { useContext } from "react";
 import { StudentContext } from "../../common/context";
-import api from "../../../../services/students";
+import { Group, WatchLater, HdrStrong } from "@material-ui/icons";
 
-const Info = ({ noControl }) => {
-  const [loading, setLoading] = useState(true);
-  const [studentData, setStudentData] = useState({});
+const Info = () => {
+  const { state } = useContext(StudentContext);
 
-  const { dispatch } = useContext(StudentContext);
-
-  useEffect(() => {
-    if (noControl.length !== 0) {
-      api
-        .getStudentInfo(noControl)
-        .then((res) => {
-          dispatch({ type: "SET_STUDENT_ID", payload: noControl });
-          setStudentData(res.studentData);
-          setLoading(false);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [noControl, dispatch]);
-
-  if (!loading) {
+  if (!state.loading) {
+    const { studentData } = state;
     return (
-      <div className="box mt-4">
-        <div className="row">
-          <div className="col-md-12 text-center d-flex justify-content-center">
-            <div className="img-student">
-              <img src={imgDefault} alt="student" width="110px" />
-            </div>
-            <h4 className="student-name">
-              {`${studentData.nombre} ${studentData.apellidoP} ${studentData.apellidoM}`}
-            </h4>
-          </div>
+      <div className="box">
+        <h5 className="mb-3">Información</h5>
+        <div className="form-group">
+          <small>
+            <Group className="text-muted mr-3" />
+            <span className="text-muted">Semestre y grupo: </span>
+            {`${studentData.semestre} ° ${studentData.grupo}`}
+          </small>
+        </div>
+        <div className="form-group">
+          <small>
+            <HdrStrong className="text-muted mr-3" />
+            <span className="text-muted">Especialidad: </span>
+            {studentData.especialidad}
+          </small>
+        </div>
+        <div className="form-group">
+          <small>
+            <WatchLater className="text-muted mr-3" />
+            <span className="text-muted">Generación: </span>
+            {studentData.generacion}
+          </small>
         </div>
       </div>
     );

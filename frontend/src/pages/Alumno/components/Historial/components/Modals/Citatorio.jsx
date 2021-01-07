@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import api from "../../../../../../services/students";
 import { StudentContext } from "../../../../common/context";
 
-import { InputField } from "../../../../../../components/Inputs";
+import { InputField, TextArea } from "../../../../../../components/Inputs";
 
 const MoldalCitatorio = () => {
-  const {
-    state: {
-      studentData: { noControl },
-    },
-  } = useContext(StudentContext);
+  const { state } = useContext(StudentContext);
+  const [data, setData] = useState({});
 
   const initialState = {
     folio: "",
@@ -21,9 +18,7 @@ const MoldalCitatorio = () => {
     docente: "",
   };
 
-  const [data, setData] = useState({});
-
-  useEffect(() => {
+  const getFolio = useCallback(() => {
     api
       .getFolio("citatorio")
       .then((res) => {
@@ -37,6 +32,8 @@ const MoldalCitatorio = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => getFolio(), [getFolio]);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -48,14 +45,15 @@ const MoldalCitatorio = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     api
-      .createDocument("citatorio", { noControl, ...data })
+      .createDocument("citatorio", { noControl: state.noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);
         } else {
           alert(res.message);
-          document.querySelector("#formReporte").reset();
+          document.querySelector("#formCitatorio").reset();
           setData(initialState);
+          getFolio();
         }
       })
       .catch((err) => console.log(err));
@@ -126,6 +124,14 @@ const MoldalCitatorio = () => {
                   name="motivo"
                   label="Motivo"
                   autoComplete="off"
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <TextArea
+                  name="observaciones"
+                  label="Observaciones"
+                  defaultValue="Sin observaciones."
                   onChange={onChange}
                 />
               </div>

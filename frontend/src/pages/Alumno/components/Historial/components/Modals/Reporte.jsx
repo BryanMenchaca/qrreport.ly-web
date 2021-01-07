@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import { StudentContext } from "../../../../common/context";
 import { InputField, TextArea } from "../../../../../../components/Inputs";
 import api from "../../../../../../services/students";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 const initialState = {
   folio: "",
@@ -44,10 +46,17 @@ const ModalReporte = () => {
     api
       .createDocument("reporte", { noControl: state.noControl, ...data })
       .then((res) => {
+        const notyf = new Notyf({
+          duration: 3000,
+          position: { x: "center", y: "top" },
+          ripple: true,
+          dismissible: true,
+        });
+
         if (res.error) {
-          alert(res.message);
+          notyf.error(res.message);
         } else {
-          alert(res.message);
+          notyf.success(res.message);
           document.querySelector("#formReporte").reset();
           setData(initialState);
           getFolio();

@@ -148,7 +148,17 @@ module.exports = {
     }
   },
   getHistory: async (req, res) => {
-    const params = req.query;
-    console.log(params);
+    const { noControl } = req.params;
+
+    const sanciones = ["reportes", "citatorios", "suspensiones"];
+
+    const history = await AlumnoModel.findOne(
+      {
+        noControl,
+      },
+      sanciones
+    ).populate(sanciones);
+
+    res.send(history);
   },
 };

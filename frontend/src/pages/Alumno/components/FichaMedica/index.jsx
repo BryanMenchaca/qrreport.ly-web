@@ -1,28 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { StudentContext } from "../../common/context";
-import api from "../../../../services/students";
 
 import starOfLife from "../../../../assets/medic-id.png";
 
 const FichaMedica = () => {
   const { state } = useContext(StudentContext);
-  const [loading, setLoading] = useState(true);
-  const [fichaMedica, setFichaMedica] = useState({});
 
-  useEffect(() => {
-    if (state.noControl.length !== 0) {
-      api
-        .getStudentInfo(state.noControl)
-        .then((res) => {
-          setFichaMedica(res.fichaMedica);
-          setLoading(false);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [state.noControl]);
-
-  if (!loading) {
+  if (!state.loading) {
+    const { fichaMedica } = state;
     return (
       <div className="box">
         <div className="d-flex mb-2">

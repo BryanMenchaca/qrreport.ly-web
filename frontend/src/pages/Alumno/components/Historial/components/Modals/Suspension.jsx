@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import api from "../../../../../../services/students";
 import { StudentContext } from "../../../../common/context";
 
 import { InputField, TextArea } from "../../../../../../components/Inputs";
 
 const ModalSuspension = () => {
-  const {
-    state: {
-      studentData: { noControl },
-    },
-  } = useContext(StudentContext);
+  const { state } = useContext(StudentContext);
+  const [data, setData] = useState({});
 
   const initialState = {
     folio: "",
@@ -20,9 +17,7 @@ const ModalSuspension = () => {
     observaciones: "Sin observaciones.",
   };
 
-  const [data, setData] = useState({});
-
-  useEffect(() => {
+  const getFolio = useCallback(() => {
     api
       .getFolio("suspension")
       .then((res) => {
@@ -36,6 +31,8 @@ const ModalSuspension = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => getFolio(), [getFolio]);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -47,7 +44,7 @@ const ModalSuspension = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     api
-      .createDocument("suspension", { noControl, ...data })
+      .createDocument("suspension", { noControl: state.noControl, ...data })
       .then((res) => {
         if (res.error) {
           alert(res.message);

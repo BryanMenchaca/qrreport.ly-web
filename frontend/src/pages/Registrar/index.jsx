@@ -16,7 +16,7 @@ const StepForm = () => {
     case 3:
       return <VerificarDatos />;
     default:
-      return <p>Default case</p>;
+      return <p>There is a problem.</p>;
   }
 };
 

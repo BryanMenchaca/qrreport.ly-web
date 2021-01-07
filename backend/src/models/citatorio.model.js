@@ -11,6 +11,7 @@ const citatorioSchema = new Schema(
     horaCita: String,
     motivo: String,
     docente: String,
+    observaciones: String,
     asistencia: { type: Boolean, default: false },
   },
   { collection: "citatorios" }

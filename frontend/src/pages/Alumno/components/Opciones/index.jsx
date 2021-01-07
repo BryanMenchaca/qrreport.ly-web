@@ -14,7 +14,7 @@ const Opciones = () => {
   }, [state.noControl]);
 
   return (
-    <div className="box ignorePrint">
+    <div className="box mt-4 ignorePrint">
       <h5 className="mb-4">Opciones</h5>
       <Link
         to={`/dashboard/editar/${state.noControl}`}

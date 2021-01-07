@@ -3,9 +3,9 @@ import { Replay } from "@material-ui/icons";
 
 const Controls = ({ reload }) => {
   return (
-    <div className="box mb-4 p-3">
+    <div className="box mb-4 p-3 ignorePrint">
       <div className="d-flex justify-content-between align-middle ignorePrint">
-        <button className="btn btn-light btn-sm" onClick={reload}>
+        <button className="btn btn-light btn-sm ignorePrint" onClick={reload}>
           <Replay className="text-muted" />
         </button>
         <div>

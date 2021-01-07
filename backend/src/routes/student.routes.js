@@ -27,6 +27,6 @@ router.post("/edit", edit);
 router.post("/createDocument/reporte", createReporte);
 router.post("/createDocument/citatorio", createCitatorio);
 router.post("/createDocument/suspension", createSuspension);
-router.get("/getHistory", getHistory);
+router.get("/getHistory/:noControl", getHistory);
 
 module.exports = router;

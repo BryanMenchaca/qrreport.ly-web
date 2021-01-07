@@ -10,6 +10,7 @@ const suspensionSchema = new Schema(
     motivo: String,
     desde: Date,
     hasta: Date,
+    observaciones: String,
   },
   { collection: "suspensiones" }
 );

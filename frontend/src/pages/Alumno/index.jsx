@@ -2,10 +2,11 @@ import React from "react";
 import { StudentProvider } from "./common/context";
 import "./alumno.css";
 
-import Info from "./components/Info";
+import Cabecera from "./components/Cabecera";
 import Menu from "./components/Menu";
 import FichaMedica from "./components/FichaMedica";
 import Historial from "./components/Historial";
+import Info from "./components/Info";
 import Opciones from "./components/Opciones";
 
 const Alumno = ({ match }) => {
@@ -14,11 +15,13 @@ const Alumno = ({ match }) => {
   return (
     <StudentProvider>
       <div className="row mt-4">
+        {/* Header */}
         <div className="col-md-12">
-          <Info noControl={noControl} />
+          <Cabecera noControl={noControl} />
         </div>
       </div>
       <div className="row">
+        {/* Navbar Menu */}
         <div className="col-md-12">
           <Menu />
         </div>
@@ -26,6 +29,7 @@ const Alumno = ({ match }) => {
       <div className="row">
         <div className="col-md-4">
           {/* Left content section */}
+          <Info />
           <Opciones />
         </div>
         <div className="col-md-8">
