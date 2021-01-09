@@ -1,0 +1,14 @@
+#navbar {
+  padding: 10px 30px;
+  background-color: #1e86ff;
+}
+
+.nav-white {
+  font-size: 14px;
+  color: #ebebeb;
+  cursor: pointer;
+}
+
+.nav-white:hover {
+  color: #fff;
+}

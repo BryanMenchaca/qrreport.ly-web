@@ -1,3 +1,7 @@
+/****
+** BLUE MENU IN STUDENT PAGE 
+****/
+
 .custom-badge {
   margin: 40px auto;
   max-width: 240px;
@@ -28,6 +32,10 @@
   font-size: 15px;
 }
 
+/****
+** CONTENT STYLES IN STUDENT PAGE
+****/
+
 .img-student {
   width: 120px;
   height: 120px;
@@ -45,10 +53,6 @@
 
 .student-name {
   margin-top: 50px;
-}
-
-.student-container {
-  max-width: 1080px;
 }
 
 @media (max-width: 768px) {

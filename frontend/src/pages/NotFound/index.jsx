@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./notfound.css";
 
-const Index = () => {
+const Index = ({ history }) => {
   useEffect(() => {
     document.title = "Oops! - 404";
   }, []);
@@ -13,7 +13,9 @@ const Index = () => {
           <h1>Oops!</h1>
           <h2>404 - The Page can't be found</h2>
         </div>
-        <a href="/login">Go Back</a>
+        <button className="go-back-btn" onClick={() => history.goBack()}>
+          Go Back
+        </button>
       </div>
     </div>
   );

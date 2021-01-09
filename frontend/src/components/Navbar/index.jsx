@@ -1,17 +1,14 @@
 import React, { useContext } from "react";
-import { Menu, PersonOutlineOutlined } from "@material-ui/icons";
+import { PersonOutlineOutlined } from "@material-ui/icons";
 import logo from "../../assets/logo.png";
 import { UserContext } from "../../contexts/UserContext";
+import "./styles.css";
 
 const NavbarTop = () => {
-  const toggleSidebar = () =>
-    document.querySelector("#sidebar").classList.toggle("toggled");
-
   const { fullname } = useContext(UserContext);
 
   return (
     <nav className="navbar navbar-expand-lg" id="navbar">
-      <Menu className="nav-white mr-3" onClick={toggleSidebar} />
       <a href="/dashboard" className="navbar-brand mr-auto">
         <img src={logo} alt="qrreport" width="90px" />
       </a>

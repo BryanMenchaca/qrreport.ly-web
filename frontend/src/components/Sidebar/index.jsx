@@ -1,12 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  HomeOutlined,
-  SearchOutlined,
-  SettingsOutlined,
-  PeopleOutline,
-  PersonAddOutlined,
-} from "@material-ui/icons";
+import { NavLink } from "react-router-dom";
 import "./menu.css";
 
 const Sidebar = () => {
@@ -14,29 +7,29 @@ const Sidebar = () => {
     <div id="sidebar" className="sidebar ignorePrint">
       <ul className="list-unstyled">
         <li>
-          <Link to="/dashboard">
-            <HomeOutlined /> <b>Inicio</b>{" "}
-          </Link>
+          <NavLink to="/dashboard" exact activeStyle={styles.active}>
+            <b>Inicio</b>
+          </NavLink>
         </li>
         <li>
-          <Link to="/dashboard/busqueda">
-            <SearchOutlined /> <b>Busqueda</b>
-          </Link>
+          <NavLink to="/dashboard/busqueda" activeStyle={styles.active}>
+            <b>Busqueda</b>
+          </NavLink>
         </li>
         <li>
-          <Link to="/dashboard/grupos">
-            <PeopleOutline /> <b>Grupos</b>
-          </Link>
+          <NavLink to="/dashboard/grupos" activeStyle={styles.active}>
+            <b>Grupos</b>
+          </NavLink>
         </li>
         <li>
-          <Link to="/dashboard/registrar">
-            <PersonAddOutlined /> <b>Registrar alumno</b>{" "}
-          </Link>
+          <NavLink to="/dashboard/registrar" activeStyle={styles.active}>
+            <b>Registrar alumno</b>
+          </NavLink>
         </li>
         <li>
-          <Link to="#">
-            <SettingsOutlined /> <b>Configuración</b>{" "}
-          </Link>
+          <NavLink to="/config" activeStyle={styles.active}>
+            <b>Configuración</b>
+          </NavLink>
         </li>
       </ul>
     </div>
@@ -44,3 +37,9 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+const styles = {
+  active: {
+    color: "#1e86ff",
+  },
+};

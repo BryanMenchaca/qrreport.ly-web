@@ -15,7 +15,7 @@ import Editar from "./Editar";
 
 const DashboardPage = () => {
   return (
-    <div className="student-container mx-auto">
+    <div className="mx-auto" style={{ maxWidth: 1080 }}>
       <Switch>
         <Route exact path={routes.inicio} component={Inicio} />
         <Route exact path={routes.busqueda} component={Busqueda} />

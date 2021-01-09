@@ -14,12 +14,12 @@ const AuthLayout = ({ children }) => {
       return (
         <UserProvider>
           <Navbar />
+          <Sidebar />
           <div
             className="d-flex align-items-stretch"
             style={{ background: "#f2f6f9" }}
           >
-            <Sidebar />
-            <div className="content p-4">{children}</div>
+            <div className="content p-4 py-5">{children}</div>
           </div>
         </UserProvider>
       );
