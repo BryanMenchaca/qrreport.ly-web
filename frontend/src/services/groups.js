@@ -27,4 +27,6 @@ const createDocument = async (documentData) => {
   return data;
 };
 
-export default { getAllGroups, getInfoAndStudentsGroup, createDocument };
+const exp = { getAllGroups, getInfoAndStudentsGroup, createDocument };
+
+export default exp;

@@ -39,13 +39,16 @@ module.exports = {
       res.json({ error: true, message: "El usuario ya existe." });
     }
   },
+  // @route     POST /api/accounts/admin/login
+  // @desc      Login to enter to dashboard
+  // @access    Private - Only for admins
   login: async (req, res) => {
     const { email, password } = req.body;
 
-    const userFound = await AccountModel.findOne({ email });
+    const userFound = await AccountModel.findOne({ email }); // Verify if user exist in db
 
     if (userFound) {
-      const match = await matchPassword(password, userFound.password);
+      const match = await matchPassword(password, userFound.password); //Verify password
       if (match) {
         var payload = {
           fullname: userFound.fullname,
@@ -63,14 +66,20 @@ module.exports = {
             res.header("Authorization", token).send(token);
           }
         );
-      } else {
+        
+      } else { // If password is not the correct, send match error
         res.json({
           error: true,
+          type_error: "UNAUTHORIZED",
           message: "Email y/o contraseña incorrectos.",
         });
       }
-    } else {
-      res.json({ error: true, message: "No exite el usuario." });
+    } else { // If user does'nt exit, send UNAUTHORIZED error
+      res.json({ 
+        error: true, 
+        type_error: "UNAUTHORIZED",
+        message: "No exite el usuario." 
+      });
     }
   },
   // To test checkToken middleware

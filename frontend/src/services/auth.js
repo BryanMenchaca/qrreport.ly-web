@@ -16,4 +16,6 @@ const logout = () => {
   window.location.href = "/login";
 };
 
-export default { login, logout };
+const exp = { login, logout };
+
+export default exp;

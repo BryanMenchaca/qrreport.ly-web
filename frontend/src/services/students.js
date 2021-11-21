@@ -49,7 +49,7 @@ const getHistory = async (noControl) => {
   return data;
 };
 
-export default {
+const exp = {
   getRandomStudents,
   search,
   registerStudent,
@@ -59,3 +59,5 @@ export default {
   edit,
   getHistory,
 };
+
+export default exp;

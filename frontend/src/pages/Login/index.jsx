@@ -12,7 +12,7 @@ const Index = () => {
       .string()
       .email("Ingrese un email válido.")
       .required("Email es un campo requerido."),
-    password: yup.string().required("Contraseña es un campo requreido."),
+    password: yup.string().required("Contraseña es un campo requerido."),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -81,7 +81,7 @@ const Index = () => {
       </form>
       <div className="text-center">
         <small className="text-muted">
-          &copy; 2020 - QR-REPORT <br /> Made with &hearts; to you.
+          &copy; 2021 - QR-REPORT <br /> Made with &hearts; to you.
         </small>
       </div>
     </div>
