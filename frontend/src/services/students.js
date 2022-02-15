@@ -49,6 +49,20 @@ const getHistory = async (noControl) => {
   return data;
 };
 
+const uploadImage = async (noControl, image) => {
+  const { data } = await axios.post(
+    `${host}/uploadImage`,
+    { noControl, imageName: `${noControl}.png`, imageBase64: image },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return data;
+};
+
 const exp = {
   getRandomStudents,
   search,
@@ -58,6 +72,7 @@ const exp = {
   getFolio,
   edit,
   getHistory,
+  uploadImage,
 };
 
 export default exp;

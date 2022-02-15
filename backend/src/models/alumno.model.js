@@ -14,9 +14,13 @@ const alumnoSchema = new Schema(
     reportes: [{ type: Schema.Types.ObjectId, ref: "Reporte" }],
     citatorios: [{ type: Schema.Types.ObjectId, ref: "Citatorio" }],
     suspensiones: [{ type: Schema.Types.ObjectId, ref: "Suspension" }],
-    curp: String,
+    curp: { type: String, default: "" },
     nss: { type: String, default: "" },
     status: Boolean,
+    urlImage: {
+      type: String,
+      default: "https://qrreport.s3.amazonaws.com/default.png",
+    },
   },
   { collection: "alumnos" }
 );

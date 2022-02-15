@@ -55,3 +55,19 @@ export const TextArea = ({ label, name, ...props }) => {
     </div>
   );
 };
+
+export const InputFile = ({ label, name, ...props }) => {
+  return (
+    <div className="form-group">
+      <label htmlFor="formFile" className="form-label mt-2">
+        Default file input example
+      </label>
+      <input
+        className="form-control custom-form-control"
+        type="file"
+        id="formFile"
+        {...props}
+      />
+    </div>
+  );
+};

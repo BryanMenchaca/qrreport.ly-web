@@ -25,7 +25,7 @@ const limit = rateLimit({
 app.use(cors());
 app.use(helmet());
 //app.use(limit);
-app.use(express.json({ limit: "15kb" }));
+app.use(express.json({ limit: "512kb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize());
 app.use(xss());

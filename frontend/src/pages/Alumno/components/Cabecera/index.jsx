@@ -1,7 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import imgDefault from "../../../../assets/default.png";
 import { StudentContext } from "../../common/context";
+import { CameraAlt } from "@material-ui/icons";
 import api from "../../../../services/students";
+import UploadPhotoModal from "../Modal";
 
 const Info = ({ noControl }) => {
   const { state, dispatch } = useContext(StudentContext);
@@ -24,13 +26,21 @@ const Info = ({ noControl }) => {
         <div className="row">
           <div className="col-md-12 text-center d-flex justify-content-center">
             <div className="img-student">
-              <img src={imgDefault} alt="student" width="110px" />
+              <img src={studentData.urlImage} alt="student" id="photo" />
+              <button
+                className="btn-upload-modal"
+                data-toggle="modal"
+                data-target="#uploadPhotoModal"
+              >
+                <CameraAlt style={{ fontSize: "15px" }} />
+              </button>
             </div>
             <h4 className="student-name">
               {`${studentData.nombre} ${studentData.apellidoP} ${studentData.apellidoM}`}
             </h4>
           </div>
         </div>
+        <UploadPhotoModal />
       </div>
     );
   } else {

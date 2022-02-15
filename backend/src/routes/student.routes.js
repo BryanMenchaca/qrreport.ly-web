@@ -23,6 +23,7 @@ router.get("/search", search);
 router.get("/random", random);
 router.get("/getFolio/:x", folio);
 router.post("/edit", edit);
+router.post("/uploadImage", require("../controllers/uploadImage.controller"));
 
 router.post("/createDocument/reporte", createReporte);
 router.post("/createDocument/citatorio", createCitatorio);

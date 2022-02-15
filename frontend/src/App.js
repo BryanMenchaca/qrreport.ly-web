@@ -57,7 +57,7 @@ const App = () => {
           path="/"
           component={() => <Redirect to={routes.login} />}
         />
-        <Route exact path="/logout" render={() => api.logout()} />} />
+        <Route exact path="/logout" render={() => api.logout()} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>

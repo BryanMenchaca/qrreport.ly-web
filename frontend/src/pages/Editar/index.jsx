@@ -11,7 +11,7 @@ const Editar = ({ match, history }) => {
   const { noControl } = match.params;
 
   useEffect(() => {
-    api
+    api // Get Info student
       .getStudentInfo(noControl)
       .then((res) => {
         setStudentData(res.studentData);
@@ -32,6 +32,7 @@ const Editar = ({ match, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     api
       .edit(newData)
       .then((res) => {
@@ -141,6 +142,9 @@ const Editar = ({ match, history }) => {
               />
             </div>
           </div>
+          {/**********
+           * FichaMedica Inputs
+           **********/}
           <div className="mt-4">
             <h6 className="text-danger">Ficha médica</h6>
             <div className="row mt-3">
