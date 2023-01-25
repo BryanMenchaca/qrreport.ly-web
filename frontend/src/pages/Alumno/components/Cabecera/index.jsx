@@ -1,9 +1,8 @@
 import React, { useEffect, useContext } from "react";
-import imgDefault from "../../../../assets/default.png";
 import { StudentContext } from "../../common/context";
 import { CameraAlt } from "@material-ui/icons";
 import api from "../../../../services/students";
-import UploadPhotoModal from "../Modal";
+import UploadPhotoModal from "../UploadImgModal";
 
 const Info = ({ noControl }) => {
   const { state, dispatch } = useContext(StudentContext);

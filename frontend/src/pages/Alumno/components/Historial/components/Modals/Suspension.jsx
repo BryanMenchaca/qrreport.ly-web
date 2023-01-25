@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import api from "../../../../../../services/students";
 import { StudentContext } from "../../../../common/context";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 import { InputField, TextArea } from "../../../../../../components/Inputs";
 
+const initialState = {
+  folio: "",
+  fecha: "",
+  desde: "",
+  hasta: "",
+  motivo: "",
+  observaciones: "Sin observaciones.",
+};
+
 const ModalSuspension = () => {
   const { state } = useContext(StudentContext);
-  const [data, setData] = useState({});
-
-  const initialState = {
-    folio: "",
-    fecha: "",
-    desde: "",
-    hasta: "",
-    motivo: "",
-    observaciones: "Sin observaciones.",
-  };
+  const [data, setData] = useState(initialState);
 
   const getFolio = useCallback(() => {
     api
@@ -43,15 +45,24 @@ const ModalSuspension = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(data);
     api
       .createDocument("suspension", { noControl: state.noControl, ...data })
       .then((res) => {
+        const notyf = new Notyf({
+          duration: 3000,
+          position: { x: "center", y: "top" },
+          ripple: true,
+          dismissible: true,
+        });
+
         if (res.error) {
-          alert(res.message);
+          notyf.error(res.message);
         } else {
-          alert(res.message);
+          notyf.success(res.message);
           document.querySelector("#formSuspension").reset();
           setData(initialState);
+          getFolio();
         }
       })
       .catch((err) => console.log(err));

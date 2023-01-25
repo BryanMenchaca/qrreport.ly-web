@@ -7,7 +7,7 @@ import verifySelectedImage from "../../../../utils/verifySelectedImage";
 import renameImage from "../../../../utils/renameImage";
 
 const UploadPhotoModal = () => {
-  const { state, dispatch } = useContext(StudentContext);
+  const { state } = useContext(StudentContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
 
